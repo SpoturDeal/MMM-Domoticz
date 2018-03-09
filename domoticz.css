@@ -1,0 +1,26 @@
+.domoticz ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.domoticz ul .name,
+.domoticz ul .art {
+  display: inline-block;
+  vertical-align: middle;
+}
+.domoticz ul .name {
+  padding: 0 .25em;
+}
+.domoticz ul .art img {
+  height: 100px;
+}
+.domoticz ul .name {
+  font-size: 50%;
+  padding: .25em .5em;
+}
+.domoticz ul.flip {
+  direction: rtl;
+}
+.red {
+  color:red;   
+}

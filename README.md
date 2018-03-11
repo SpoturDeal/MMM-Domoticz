@@ -22,7 +22,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Energy used</i>
 |`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
-|`showItems`| The items you like to show. <br> **Type** One of the following: `temperature, energy` <br> **Default** <i>`temperature, energy`</i> |
+|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy` <br> **Default** <i>`temperature, energy`</i> |
+|`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 
 Here is an example of an entry in `config.js`
 ```
@@ -34,12 +35,13 @@ Here is an example of an entry in `config.js`
 		apiBase: '192.168.xxx.xxx',
 		apiPort: 8088,
 		apiUser: "XXXX",
-        apiPw: "xxxx",
+        	apiPw: "xxxx",
 		moduleTitle: "Current temperatures Domiticz",
 		energyTitle: "Energy",
 		energyNow: "Currently",
 		energyTotal: "Energy used",
-		showItems: ['temperature','energy']   // possible items  temperature, energy
+		showItems: ['temperature','energy'],   // possible items  temperature, energy
+		excludedDevices: ['none','add your own']  // Device that will not be shown
 	}
 }
 ```
@@ -52,11 +54,11 @@ Here is an example of an entry in `config.js`
 The MIT License (MIT)
 =====================
 
-Copyright © 2018 SpoturDeal - Carl 
+Copyright ¬© 2018 SpoturDeal - Carl 
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
-files (the ìSoftwareî), to deal in the Software without
+files (the ‚ÄúSoftware‚Äù), to deal in the Software without
 restriction, including without limitation the rights to use,
 copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the
@@ -66,6 +68,6 @@ conditions:
 The above copyright notice and this permission notice shall be
 included in all copies or substantial portions of the Software.
 
-**The software is provided ìas isî, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability,
+**The software is provided ‚Äúas is‚Äù, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability,
 fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability,
 whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.**

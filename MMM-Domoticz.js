@@ -44,7 +44,7 @@
               if (dev.Type.indexOf('Temp') >- 1){
                 tempCount++;
                 therm += '<tr><td class="small">' + dev.Name + '</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg;</td></tr>";
-              } else if (dev.Data == "On") {
+              } else if (dev.Data == "On" || dev.Data == "Set Level") {
                 powerCount++
                 power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa fa-lightbulb-o"></i> ' + dev.Data + "</td></tr>";
               }

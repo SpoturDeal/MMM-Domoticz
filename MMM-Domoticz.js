@@ -84,7 +84,7 @@
 	},
 	getStyles: function() {
 		return ['domoticz.css',
-            'https://use.fontawesome.com/releases/v5.0.8/css/all.css'];
+            '//use.fontawesome.com/releases/v5.0.8/css/all.css'];
 	},
 	getDom: function() {
 		var content = '';

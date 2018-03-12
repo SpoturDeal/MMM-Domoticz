@@ -46,7 +46,7 @@
                 therm += '<tr><td class="small">' + dev.Name + '</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg;</td></tr>";
               } else if (dev.Data == "On" || dev.Data == "Set Level") {
                 powerCount++
-                power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa fas-lightbulb"></i></td></tr>';
+                power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fas fa-lightbulb"></i></td></tr>';
               }
             }
 

@@ -46,7 +46,7 @@
                 therm += '<tr><td class="small">' + dev.Name + '</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg;</td></tr>";
               } else if (dev.Data == "On" || dev.Data == "Set Level") {
                 powerCount++
-                power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa fa-lightbulb-o"></i> ' + dev.Data + "</td></tr>";
+                power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa fas-lightbulb"></i></td></tr>';
               }
             }
 
@@ -84,7 +84,7 @@
 	},
 	getStyles: function() {
 		return ['domoticz.css',
-            'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'];
+            'https://use.fontawesome.com/releases/v5.0.8/css/all.css'];
 	},
 	getDom: function() {
 		var content = '';

@@ -43,10 +43,28 @@
             if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
               if (dev.Type.indexOf('Temp') >- 1){
                 tempCount++;
-                therm += '<tr><td class="small">' + dev.Name + '</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg;</td></tr>";
+                therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg;</td></tr>";
               } else if (dev.Data == "On" || dev.Data == "Set Level") {
                 powerCount++
-                power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa fa-lightbulb-o"></i></td></tr>';
+                cImage = parseInt(dev.CustomImage);
+                switch (cImage) {
+                  case 1:
+                    icon="fa-plug"
+                    break;
+                  case 2:
+                    icon="fa-television"
+                    break;
+                  case 9:
+                    icon="fa-power-off"
+                    break;
+                  case 17:
+                    icon="fa-desktop"
+                    break;
+                  default:
+                    icon="fa-lightbulb-o"
+
+                }
+                power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa ' + icon + '"></i></td></tr>';
               }
             }
 

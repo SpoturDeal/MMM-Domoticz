@@ -8,13 +8,17 @@
 	defaults: {
         updateInterval: 45,                          // every 45 seconds
         apiBase: '192.168.xx.xxx',                   // the IPaddress of you Domoticz HC in your home network
-        apiPort: 8088,                                 // just leave at 80
+        apiPort: 8080,                                 // just leave at 80
         moduleTitle: "Current temperatures Domoticz",  // You can adapt the following text to fit your language
-        energyTitle: "Energy use",                   // The tile for the energy use part
+        energyTitle: "Energy used by",                 // The tile for the energy use part
+        batteryTitle: "Battery level",
+        coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
-        showItems: ['temperature','energy'],          // Currently available temperature, energy
-        excludeDevices: ['none']              // Devices you don`t want to see
+        showItems: ['temperature','energy','battery','co'],
+        batteryThreshold: 15,                        // if lower then threshold show
+        coThreshold: 700,                     // if higher then threshold show
+        excludeDevices: ['none']                     // Devices you don`t want to see
 	},
 	start: function() {
 		Log.info('Starting module: ' + this.name);
@@ -34,10 +38,10 @@
     var text = '<div>';
         var therm ='<header class="module-header">' + this.config.moduleTitle + '</header><table>';
         var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
-        var powerUse=0;
-        var usedEnergy=0;
-        var powerCount=0;
-        var tempCount=0;
+        var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table>';
+        var co ='<header class="module-header">' + this.config.coTitle + '</header><table>';
+        var powerUse=0; usedEnergy=0;
+        var powerCount=0; tempCount=0; coCount=0; batteryCount=0;
         for (i=0;i<data.result.length;i++){
             var dev=data.result[i];
             if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
@@ -62,9 +66,20 @@
                     break;
                   default:
                     icon="fa-lightbulb-o"
-
                 }
                 power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa ' + icon + '"></i></td></tr>';
+              }
+              if (dev.BatteryLevel <= this.config.batteryThreshold) {
+                 batteryCount++;
+                 batteryIcon = "fa-battery-half"
+                 if (dev.BatteryLevel < 15){
+                    batteryIcon = "fa-battery-quarter"
+                 }
+                 batt += '<tr><td class="small '+(dev.BatteryLevel< 15?'red':'')+'">' + dev.Name  +'</td><td class="small '+(dev.BatteryLevel< 15?'red':'')+'"><i class="fa ' + batteryIcon + '"></i> ' + dev.BatteryLevel + "%</td></tr>";
+              }
+              if (dev.Type == "Air Quality" && dev.Data > this.config.coThreshold + " ppm"){
+                 coCount++;
+                 co += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + dev.Data + "</td></tr>";
               }
             }
 
@@ -72,7 +87,8 @@
         }
         therm += '</table>';
         power += '</table>';
-
+        batt += '</table>';
+        co += '</table>';
         //power +='<table><tr><td class="small">' + this.config.energyNow + '</td><td class="small">' + powerUse.toFixed(2) +' Watt</td></tr>';
         //power +='<tr><td class="small">' + this.config.energyTotal +'</td><td class="small">' + usedEnergy.toFixed(2) +' kWh</td></tr></table>';
         if (tempCount >0 ){
@@ -80,6 +96,12 @@
         }
         if (powerCount > 0){
             text += (this.config.showItems.indexOf('energy') !== -1?power:'');
+        }
+        if (batteryCount > 0){
+            text += (this.config.showItems.indexOf('battery') !== -1?batt:'');
+        }
+        if (coCount > 0){
+            text += (this.config.showItems.indexOf('co') !== -1?co:'');
         }
         text += '</div>';
 

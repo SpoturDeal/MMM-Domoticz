@@ -18,10 +18,14 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`apiPort`|The port your Domiticz uses.<br>**Type:** `Integer`<br>**Default:** <i>8088</i>|
 |`apiUser`| The username you use to login on your Domoticz. <br>**Type:** `string`<br>**Default:** <i>XXXX</i>
 |`apiPw`| The password you use to login.. <br>**Type:** `string`<br>**Default:** <i>xxxx</i>
-|`energyTitle`| Energy. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Energy</i>
+|`energyTitle`| Energy title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Energy used by</i>
+|`batteryTitle`| Battery title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Battery level</i>
+|`coTitle`| CO2 title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>CO2 level</i>
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Energy used</i>
 |`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
+|`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>|
+|`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
 |`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy` <br> **Default** <i>`temperature, energy`</i> |
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 
@@ -37,10 +41,14 @@ Here is an example of an entry in `config.js`
 		apiUser: "XXXX",
         	apiPw: "xxxx",
 		moduleTitle: "Current temperatures Domiticz",
-		energyTitle: "Energy",
+		energyTitle: "Energy used by",
+		batteryTitle: "Battery level",
+		coTitle: "CO2 level"
 		energyNow: "Currently",
 		energyTotal: "Energy used",
-		showItems: ['temperature','energy'],   // possible items  temperature, energy
+		batteryThreshold: 20,
+                coThreshold: 650,
+		showItems: ['temperature','energy','battery','co'],   // possible items  temperature, energy
 		excludedDevices: ['none','add your own']  // Device that will not be shown
 	}
 }

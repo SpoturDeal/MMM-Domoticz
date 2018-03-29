@@ -32,12 +32,12 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 Here is an example of an entry in `config.js`
 ```
 {
-	module: "MMM-Domiticz",
+	module: "MMM-Domoticz",
 	position: "top_right",   // see mirror setting for options
 	config: {          
 		updateInterval: 45, // every 45 seconds
 		apiBase: '192.168.xxx.xxx',
-		apiPort: 8088,
+		apiPort: 8080,
 		apiUser: "XXXX",
         	apiPw: "xxxx",
 		moduleTitle: "Current temperatures Domiticz",

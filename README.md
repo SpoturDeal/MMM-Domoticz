@@ -15,7 +15,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |---|---|
 |`updateInterval`|How fast do you like updates.<br>**Type:** `Integer`<br>**Default:** <i>45</i>| seconds 
 |`apiBase`|The IP Address of your Domoticz.<br>**Type:** `string`<br>**Default:** <i>192.168.xxx.xxx</i>|
-|`apiPort`|The port your Domiticz uses.<br>**Type:** `Integer`<br>**Default:** <i>8088</i>|
+|`apiPort`|The port your Domiticz uses.<br>**Type:** `Integer`<br>**Default:** <i>8080</i>|
 |`apiUser`| The username you use to login on your Domoticz. <br>**Type:** `string`<br>**Default:** <i>XXXX</i>
 |`apiPw`| The password you use to login.. <br>**Type:** `string`<br>**Default:** <i>xxxx</i>
 |`energyTitle`| Energy title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Energy used by</i>

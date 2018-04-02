@@ -58,6 +58,9 @@ Here is an example of an entry in `config.js`
 #### Display type: details
 ![Screenshot of detail mode](/screendomoticz.png?raw=true )
 
+## Use an ESP32 WiFi module to controll your shutters 
+<a href="https://github.com/SpoturDeal/ESP32Stepper">Control your shutter with WiFi asnd ESP32 module</a>
+
 
 The MIT License (MIT)
 =====================

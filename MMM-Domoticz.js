@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- *
+ * version 1.04 15th April 2018
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
@@ -12,10 +12,11 @@
         moduleTitle: "Current temperatures Domoticz",  // You can adapt the following text to fit your language
         energyTitle: "Energy used by",                 // The tile for the energy use part
         batteryTitle: "Battery level",
+        blindsTitle:  "Blinds",
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
-        showItems: ['temperature','energy','battery','co'],
+        showItems: ['temperature','energy','battery','co','blinds'],
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                     // if higher then threshold show
         excludeDevices: ['none']                     // Devices you don`t want to see
@@ -40,8 +41,9 @@
         var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
         var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table>';
         var co ='<header class="module-header">' + this.config.coTitle + '</header><table>';
+        var blinds ='<header class="module-header">' + this.config.blindsTitle + '</header><table>';
         var powerUse=0; usedEnergy=0;
-        var powerCount=0; tempCount=0; coCount=0; batteryCount=0;
+        var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;
         for (i=0;i<data.result.length;i++){
             var dev=data.result[i];
             if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
@@ -69,6 +71,10 @@
                 }
                 power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa ' + icon + '"></i></td></tr>';
               }
+              if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
+                blindsCount++;
+                blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + dev.Status +  "</td></tr>";
+              }
               if (dev.BatteryLevel <= this.config.batteryThreshold) {
                  batteryCount++;
                  batteryIcon = "fa-battery-half"
@@ -88,6 +94,7 @@
         therm += '</table>';
         power += '</table>';
         batt += '</table>';
+        blinds +='</table>';
         co += '</table>';
         //power +='<table><tr><td class="small">' + this.config.energyNow + '</td><td class="small">' + powerUse.toFixed(2) +' Watt</td></tr>';
         //power +='<tr><td class="small">' + this.config.energyTotal +'</td><td class="small">' + usedEnergy.toFixed(2) +' kWh</td></tr></table>';
@@ -99,6 +106,9 @@
         }
         if (batteryCount > 0){
             text += (this.config.showItems.indexOf('battery') !== -1?batt:'');
+        }
+        if (blindsCount > 0){
+            text += (this.config.showItems.indexOf('blinds') !== -1?blinds:'');
         }
         if (coCount > 0){
             text += (this.config.showItems.indexOf('co') !== -1?co:'');

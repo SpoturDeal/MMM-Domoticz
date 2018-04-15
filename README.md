@@ -21,6 +21,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`energyTitle`| Energy title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Energy used by</i>
 |`batteryTitle`| Battery title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Battery level</i>
 |`coTitle`| CO2 title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>CO2 level</i>
+|`blindsTitle`| Blinds title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Blinds</i>
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Energy used</i>
 |`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
@@ -43,12 +44,13 @@ Here is an example of an entry in `config.js`
 		moduleTitle: "Current temperatures Domiticz",
 		energyTitle: "Energy used by",
 		batteryTitle: "Battery level",
-		coTitle: "CO2 level"
+		coTitle: "CO2 level",
+		blindsTitle: "Blinds",
 		energyNow: "Currently",
 		energyTotal: "Energy used",
 		batteryThreshold: 20,
                 coThreshold: 650,
-		showItems: ['temperature','energy','battery','co'],   // possible items  temperature, energy
+		showItems: ['temperature','energy','battery','co','blinds'],   // possible items  temperature, energy
 		excludedDevices: ['none','add your own']  // Device that will not be shown
 	}
 }

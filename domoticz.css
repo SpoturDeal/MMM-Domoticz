@@ -21,6 +21,9 @@
 .domoticz ul.flip {
   direction: rtl;
 }
-.red {
-  color:red;   
+.domoticz .red {
+  color:red;
+}
+.domoticz .red {
+  color:yellow;
 }

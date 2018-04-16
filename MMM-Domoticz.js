@@ -73,7 +73,7 @@
               }
               if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
                 blindsCount++;
-                blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + dev.Status +  "</td></tr>";
+                blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small'+(dev.Status=="Closed"?'yellow':'')+'">' + dev.Status +  "</td></tr>";
               }
               if (dev.BatteryLevel <= this.config.batteryThreshold) {
                  batteryCount++;
@@ -85,7 +85,7 @@
               }
               if (dev.Type == "Air Quality" && dev.Data > this.config.coThreshold + " ppm"){
                  coCount++;
-                 co += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + dev.Data + "</td></tr>";
+                 co += '<tr><td class="small'+(dev.Data > this.config.coThreshold + 150?'red':'')+'">' + dev.Name  +'</td><td class="small">' + dev.Data + "</td></tr>";
               }
             }
 

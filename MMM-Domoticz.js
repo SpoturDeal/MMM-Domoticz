@@ -73,7 +73,7 @@
               }
               if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
                 blindsCount++;
-                blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(dev.Status=="Closed"?'yellow':'')+'">' + dev.Status +  "</td></tr>";
+                blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
               }
               if (dev.BatteryLevel <= this.config.batteryThreshold) {
                  batteryCount++;

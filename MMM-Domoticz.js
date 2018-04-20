@@ -99,7 +99,7 @@
               }
               if (dev.Type.indexOf('Humidity') >- 1){
                 tempCount++;
-                humi += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + parseInt(dev.Humidity) + "% <i class="fa fa-tint"></i></td></tr>";
+                humi += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
               }
             }
 

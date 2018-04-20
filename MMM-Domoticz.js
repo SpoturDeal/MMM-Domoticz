@@ -56,8 +56,7 @@
         if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
            if (dev.Type.indexOf('Temp') >- 1){
               tempCount++;
-              therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small ';
-              therm += (dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1);
+              therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+ (dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1);
               therm += '&deg; <i class="fa fa-thermometer-half"></i></td></tr>';
            } else if (dev.Data == "On" || dev.Data == "Set Level") {
               powerCount++
@@ -82,9 +81,7 @@
            }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               blindsCount++;
-              blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small ';
-              blinds += (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-';
-              blinds += (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
+              blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
           }
           if (dev.BatteryLevel <= this.config.batteryThreshold) {
               batteryCount++;
@@ -92,9 +89,7 @@
               if (dev.BatteryLevel < 15){
                   batteryIcon = "fa-battery-quarter"
               }
-              batt += '<tr><td class="small '+(dev.BatteryLevel< 15?'red':'')+'">' + dev.Name;
-              batt +='</td><td class="small '+(dev.BatteryLevel< 15?'red':'');
-              bat t+='"><i class="fa ' + batteryIcon + '"></i> ' + dev.BatteryLevel + "%</td></tr>";
+              batt += '<tr><td class="small '+(dev.BatteryLevel< 15?'red':'')+'">' + dev.Name + '</td><td class="small '+(dev.BatteryLevel< 15?'red':'') + '"><i class="fa ' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

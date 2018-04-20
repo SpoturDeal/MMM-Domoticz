@@ -19,7 +19,7 @@
         showItems: ['temperature','energy','battery','co','blinds'],
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
-        subMenus: "On",
+        subMenus: true,                              // true or false
         excludeDevices: ['none']                     // Devices you don`t want to see
 	},
 	start: function() {
@@ -39,7 +39,7 @@
 
     var text = '<div>';
     var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi="";
-        if (this.config.subMenus == "On") {
+        if (this.config.subMenus === true) {
            var therm ='<header class="module-header">' + this.config.moduleTitle + '</header><table>';
            var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
            var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table>';
@@ -106,7 +106,7 @@
 
         }
         therm += humi;
-        if (this.config.subMenus == "On") {
+        if (this.config.subMenus === true) {
            therm += '</table>';
            power += '</table>';
            batt += '</table>';
@@ -130,7 +130,7 @@
         if (coCount > 0){
             text += (this.config.showItems.indexOf('co') !== -1?co:'');
         }
-        if (this.config.subMenus !== "On") {
+        if (this.config.subMenus !== true) {
             text +='</table>';
         }
         text += '</div>';

@@ -55,7 +55,7 @@
             if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
               if (dev.Type.indexOf('Temp') >- 1){
                 tempCount++;
-                therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg;</td></tr>";
+                therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1) + "&deg; <i class="fa fa-thermometer-half"></i></td></tr>";
               } else if (dev.Data == "On" || dev.Data == "Set Level") {
                 powerCount++
                 cImage = parseInt(dev.CustomImage);

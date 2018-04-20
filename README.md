@@ -28,6 +28,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>|
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
 |`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy` <br> **Default** <i>`temperature, energy`</i> |
+|`subMenus`| Set if you want separate menus.<br/>**Type:** `string`<br>**Options:** On, Off<br>**Default:** <i>On</i>
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 
 Here is an example of an entry in `config.js`
@@ -50,6 +51,7 @@ Here is an example of an entry in `config.js`
 		energyTotal: "Energy used",
 		batteryThreshold: 20,
                 coThreshold: 650,
+		subMenus: "On",
 		showItems: ['temperature','energy','battery','co','blinds'],   // possible items  temperature, energy
 		excludedDevices: ['none','add your own']  // Device that will not be shown
 	}

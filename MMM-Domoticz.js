@@ -18,7 +18,8 @@
         energyTotal: "Total used",                   // Label for total registred energy used
         showItems: ['temperature','energy','battery','co','blinds'],
         batteryThreshold: 15,                        // if lower then threshold show
-        coThreshold: 700,                     // if higher then threshold show
+        coThreshold: 700,                            // if higher then threshold show
+        subMenus: "On",
         excludeDevices: ['none']                     // Devices you don`t want to see
 	},
 	start: function() {
@@ -32,16 +33,21 @@
 	update: function(){
 		this.sendSocketNotification(
 			'DOMOTICZ_READ',
-			'http://' + this.config.apiUser + ':' + this.config.apiPw + '@' + this.config.apiBase + ":" + this.config.apiPort + "/" + 'json.htm?type=devices&used=true&order=Name');
+			'http://' + this.config.apiUser + ':' + this.config.apiPw + '@' + this.config.apiBase + ":" + this.config.apiPort + '/json.htm?type=devices&used=true&order=Name');
 	},
 	render: function(data){
 
     var text = '<div>';
-        var therm ='<header class="module-header">' + this.config.moduleTitle + '</header><table>';
-        var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
-        var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table>';
-        var co ='<header class="module-header">' + this.config.coTitle + '</header><table>';
-        var blinds ='<header class="module-header">' + this.config.blindsTitle + '</header><table>';
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi="";
+        if (this.config.subMenus == "On") {
+           var therm ='<header class="module-header">' + this.config.moduleTitle + '</header><table>';
+           var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
+           var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table>';
+           var co ='<header class="module-header">' + this.config.coTitle + '</header><table>';
+           var blinds ='<header class="module-header">' + this.config.blindsTitle + '</header><table>';
+        } else {
+           text += '<header class="module-header">Domoticz</header><table>';
+        }
         var powerUse=0; usedEnergy=0;
         var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;
         for (i=0;i<data.result.length;i++){
@@ -83,19 +89,30 @@
                  }
                  batt += '<tr><td class="small '+(dev.BatteryLevel< 15?'red':'')+'">' + dev.Name  +'</td><td class="small '+(dev.BatteryLevel< 15?'red':'')+'"><i class="fa ' + batteryIcon + '"></i> ' + dev.BatteryLevel + "%</td></tr>";
               }
-              if (dev.Type == "Air Quality" && dev.Data > this.config.coThreshold + " ppm"){
-                 coCount++;
-                 co += '<tr><td class="small '+(dev.Data > this.config.coThreshold + 150?'red':'')+'">' + dev.Name  +'</td><td class="small">' + dev.Data + "</td></tr>";
+              if (dev.Type == "Air Quality"){
+                pts=dev.Data.split(' ');
+                if (pts[0] > this.config.coThreshold){
+                   coCount++;
+                   alarmLvl=this.config.coThreshold + 200;
+                   co += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(pts[0] > alarmLvl?'red':'')+'">' + dev.Data + '</td></tr>';
+                }
+              }
+              if (dev.Type.indexOf('Humidity') >- 1){
+                tempCount++;
+                humi += '<tr><td class="small">' + dev.Name  +'</td><td class="small">' + parseInt(dev.Humidity) + "% <i class="fa fa-tint"></i></td></tr>";
               }
             }
 
 
         }
-        therm += '</table>';
-        power += '</table>';
-        batt += '</table>';
-        blinds +='</table>';
-        co += '</table>';
+        therm += humi;
+        if (this.config.subMenus == "On") {
+           therm += '</table>';
+           power += '</table>';
+           batt += '</table>';
+           blinds +='</table>';
+           co += '</table>';
+        }
         //power +='<table><tr><td class="small">' + this.config.energyNow + '</td><td class="small">' + powerUse.toFixed(2) +' Watt</td></tr>';
         //power +='<tr><td class="small">' + this.config.energyTotal +'</td><td class="small">' + usedEnergy.toFixed(2) +' kWh</td></tr></table>';
         if (tempCount >0 ){
@@ -112,6 +129,9 @@
         }
         if (coCount > 0){
             text += (this.config.showItems.indexOf('co') !== -1?co:'');
+        }
+        if (this.config.subMenus !== "On") {
+            text +='</table>';
         }
         text += '</div>';
 

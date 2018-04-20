@@ -24,7 +24,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`blindsTitle`| Blinds title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Blinds</i>
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Energy used</i>
-|`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
+|`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>My smart home by Domoticz</i>
+|`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>|
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
 |`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy` <br> **Default** <i>`temperature, energy`</i> |
@@ -42,7 +43,7 @@ Here is an example of an entry in `config.js`
 		apiPort: 8080,
 		apiUser: "XXXX",
         	apiPw: "xxxx",
-		moduleTitle: "Current temperatures Domiticz",
+		moduleTitle: "My smart home by Domoticz",
 		energyTitle: "Energy used by",
 		batteryTitle: "Battery level",
 		coTitle: "CO2 level",

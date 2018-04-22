@@ -39,7 +39,7 @@
 	render: function(data){
 
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi="";
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; tempName="";
     if (this.config.subMenus === true) {
        var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table>';
        var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
@@ -58,6 +58,7 @@
               tempCount++;
               therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+ (dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1);
               therm += '&deg; <i class="fa fa-thermometer-half"></i></td></tr>';
+              tempName = dev.Name;
            } else if (dev.Data == "On" || dev.Data == "Set Level") {
               powerCount++
               cImage = parseInt(dev.CustomImage);
@@ -101,12 +102,13 @@
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
               tempCount++;
-              therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'')  +'</td><td class="small">';
               therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+              tempName = dev.Name;
           }
           if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
               tempCount++;
-              therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'')  +'</td><td class="small">';
               therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
           }
       }

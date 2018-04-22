@@ -17,10 +17,10 @@
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
-        showItems: ['temperature','energy','battery','co','blinds'],
+        showItems: ['temperature','energy','battery','co','blinds','humdity','baro'],
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
-        subMenus: true,                              // true or false
+        subMenus: false,                              // true or false
         excludeDevices: ['none']                     // Devices you don`t want to see
 	},
 	start: function() {
@@ -99,10 +99,15 @@
                  co += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(pts[0] > alarmLvl?'red':'')+'">' + dev.Data + '</td></tr>';
               }
           }
-          if (dev.Type.indexOf('Humidity') >- 1){
+          if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
               tempCount++;
               therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
               therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+          }
+          if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
+              tempCount++;
+              therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
+              therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
           }
       }
 

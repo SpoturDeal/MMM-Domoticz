@@ -102,13 +102,13 @@
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
               tempCount++;
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'')  +'</td><td class="small">';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└──')  +'</td><td class="small">';
               therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
               tempName = dev.Name;
           }
           if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
               tempCount++;
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'')  +'</td><td class="small">';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└──')  +'</td><td class="small">';
               therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
           }
       }

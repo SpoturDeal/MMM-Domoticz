@@ -28,7 +28,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>|
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
-|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy` <br> **Default** <i>`temperature, energy`</i> |
+|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro` <br> **Default** <i>`temperature, energy`</i> |
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, flase<br>**Default:** <i>true</i>
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 
@@ -53,7 +53,7 @@ Here is an example of an entry in `config.js`
 		batteryThreshold: 20,
                 coThreshold: 650,
 		subMenus: true,
-		showItems: ['temperature','energy','battery','co','blinds'],   // possible items  temperature, energy
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro'],   // possible items  temperature, energy
 		excludedDevices: ['none','add your own']  // Device that will not be shown
 	}
 }
@@ -66,6 +66,8 @@ Here is an example of an entry in `config.js`
 ## Use an ESP32 WiFi module to controll your shutters 
 <a href="https://github.com/SpoturDeal/ESP32Stepper">Control your shutter with WiFi asnd ESP32 module</a>
 
+## 22th April 2018
+Added Humidity and Barometric pressure. Must be added in config.js to be shown grouped on the sensors name.
 
 The MIT License (MIT)
 =====================

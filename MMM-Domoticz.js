@@ -9,9 +9,9 @@
         updateInterval: 45,                          // every 45 seconds
         apiBase: '192.168.xx.xxx',                   // the IPaddress of you Domoticz HC in your home network
         apiPort: 8080,                               // just leave at 80
-        moduleTitle: "My smart home",                //
-        temperatureTitle:"Current temperatures Domoticz",  // You can adapt the following text to fit your language
-        energyTitle: "Energy used by",                 // The tile for the energy use part
+        moduleTitle: "My smart home by Domoticz",    //
+        temperatureTitle:"Current temperatures",  // You can adapt the following text to fit your language
+        energyTitle: "Energy used by",               // The tile for the energy use part
         batteryTitle: "Battery level",
         blindsTitle:  "Blinds",
         coTitle: "CO2 level",
@@ -78,7 +78,7 @@
                     icon="fa-lightbulb-o"
               }
               power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa ' + icon + '"></i></td></tr>';
-           }
+          }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               blindsCount++;
               blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
@@ -101,14 +101,13 @@
           }
           if (dev.Type.indexOf('Humidity') >- 1){
               tempCount++;
-              humi += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
-              humi += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+              therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
+              therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
           }
       }
 
 
     }
-    therm += humi;
     if (this.config.subMenus === true) {
        therm += '</table>';
        power += '</table>';
@@ -120,8 +119,8 @@
     //power +='<tr><td class="small">' + this.config.energyTotal +'</td><td class="small">' + usedEnergy.toFixed(2) +' kWh</td></tr></table>';
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }
     if (powerCount > 0){   text += (this.config.showItems.indexOf('energy') !== -1?power:''); }
-    if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (blindsCount > 0){  text += (this.config.showItems.indexOf('blinds') !== -1?blinds:'');  }
+    if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
     if (this.config.subMenus !== true) {
         text +='</table>';

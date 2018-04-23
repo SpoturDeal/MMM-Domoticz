@@ -17,7 +17,7 @@
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
-        showItems: ['temperature','energy','battery','co','blinds','humdity','baro'],
+        showItems: ['temperature','energy','battery','co','blinds','humdity','baro','usage'],
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
         subMenus: false,                              // true or false
@@ -54,6 +54,10 @@
     for (i=0;i<data.result.length;i++){
         var dev=data.result[i];
         if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
+           if (dev.Usage){
+               wtt=dev.Usage.split(' ');
+               powerUse += parseFloat(wtt[0]);
+           }
            if (dev.Type.indexOf('Temp') >- 1){
               tempCount++;
               therm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+ (dev.Temp< 0.6?'red':'')+'">' + parseFloat(dev.Temp).toFixed(1);
@@ -102,13 +106,13 @@
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
               tempCount++;
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└──')  +'</td><td class="small">';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small">';
               therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
               tempName = dev.Name;
           }
           if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
               tempCount++;
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└──')  +'</td><td class="small">';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small">';
               therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
           }
       }
@@ -129,6 +133,12 @@
     if (blindsCount > 0){  text += (this.config.showItems.indexOf('blinds') !== -1?blinds:'');  }
     if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
+    if (powerUse>0 && this.config.showItems.indexOf('usage')!== -1 ){
+          if (this.config.subMenus === true) { text += '<table>'; }
+          text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' kWh</td></tr>';
+          if (this.config.subMenus === true) { text += '</table>'; }
+    }
+
     if (this.config.subMenus !== true) {
         text +='</table>';
     }

@@ -135,7 +135,7 @@
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
     if (powerUse>0 && this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text += '<table>'; }
-          text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' kWh</td></tr>';
+          text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' Watt</td></tr>';
           if (this.config.subMenus === true) { text += '</table>'; }
     }
 

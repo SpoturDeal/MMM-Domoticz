@@ -17,6 +17,7 @@
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
+        energyToday: "Today used",                   // Label for energy used today
         showItems: ['temperature','energy','battery','co','blinds','humdity','baro','usage'],
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
@@ -49,14 +50,24 @@
     } else {
        text += '<header class="module-header">' + this.config.moduleTitle + '</header><table>';
     }
-    var powerUse=0; usedEnergy=0;
+    var powerUse=0; usedEnergy=0; todayEnergy=0;
     var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;
     for (i=0;i<data.result.length;i++){
         var dev=data.result[i];
         if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
-           if (dev.Usage){
-               wtt=dev.Usage.split(' ');
-               powerUse += parseFloat(wtt[0]);
+           if (dev.Usage && this.config.showItems.indexOf('usage')!== -1 ){
+              wtt=dev.Usage.split(' ');
+              if (wtt.length > 0){
+                 powerUse += parseFloat(wtt[0]);
+              }
+              wtt=dev.Data.split(' ');
+              if (wtt.length > 0){
+                 usedEnergy += parseFloat(wtt[0]);
+              }
+              wtt=dev.CounterToday.split(' ');
+              if (wtt.length > 0){
+                 todayEnergy += parseFloat(wtt[0]);
+              }
            }
            if (dev.Type.indexOf('Temp') >- 1){
               tempCount++;
@@ -136,6 +147,8 @@
     if (powerUse>0 && this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text += '<table>'; }
           text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' Watt</td></tr>';
+          text += '<tr><td class="small">'+ this.config.energyToday +'</td><td class="small">' + parseFloat(todayEnergy).toFixed(1) + ' kWh</td></tr>';
+          text += '<tr><td class="small">'+ this.config.energyTotal +'</td><td class="small">' + parseFloat(usedEnergy).toFixed(1) + ' kWh</td></tr>';
           if (this.config.subMenus === true) { text += '</table>'; }
     }
 

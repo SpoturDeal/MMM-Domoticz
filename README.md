@@ -23,7 +23,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`coTitle`| CO2 title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>CO2 level</i>
 |`blindsTitle`| Blinds title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Blinds</i>
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>
-|`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Energy used</i>
+|`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>
+|`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>
 |`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>My smart home by Domoticz</i>
 |`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>|
@@ -50,6 +51,7 @@ Here is an example of an entry in `config.js`
 		blindsTitle: "Blinds",
 		energyNow: "Currently using",
 		energyTotal: "Energy used",
+		energyToday: "Energy used today",
 		batteryThreshold: 20,
                 coThreshold: 650,
 		subMenus: true,
@@ -70,7 +72,8 @@ Here is an example of an entry in `config.js`
 Added Humidity and Barometric pressure. Must be added in config.js to be shown grouped on the sensors name.
 
 ## 23th April 2018
-Added current use of kWh please update config.js showItems with 'usage'
+Added current use of Watts please update config.js showItems with 'usage'
+Added total and todays use of energy in kWh. 
 
 The MIT License (MIT)
 =====================

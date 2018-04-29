@@ -32,7 +32,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage` <br> **Default** <i>`temperature, energy`</i> |
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, flase<br>**Default:** <i>true</i>
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
-
+|`textWhite`| Set the text colour to white instead of grey. <br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
 Here is an example of an entry in `config.js`
 ```
 {
@@ -56,7 +56,8 @@ Here is an example of an entry in `config.js`
                 coThreshold: 650,
 		subMenus: true,
 		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage'],   
-		excludedDevices: ['none','add your own']  // Device that will not be shown
+		excludedDevices: ['none','add your own'],  // Device that will not be shown
+		textWhite: false
 	}
 }
 ```

@@ -44,14 +44,14 @@
     var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; tempName="";
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
-       var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
-       var power='<header class="module-header">' + this.config.energyTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
-       var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
-       var co ='<header class="module-header">' + this.config.coTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
-       var blinds ='<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
+       var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table'+this.setTextColour()+'>';
+       var power='<header class="module-header">' + this.config.energyTitle + '</header><table'+this.setTextColour()+'>';
+       var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table'+this.setTextColour()+'>';
+       var co ='<header class="module-header">' + this.config.coTitle + '</header><table'+this.setTextColour()+'>';
+       var blinds ='<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour()+'>';
     } else {
        // make a single table without suBMenus
-       text += '<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
+       text += '<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour()+'>';
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0;
@@ -197,8 +197,8 @@
 		loading: '<div class="dimmed light small">Loading Domoticz data ....</div>'
 
 	},
-  setTextColour: function(YesOrNo){
-    return (YesOrNo===true?' class="white"':'');
+  setTextColour: function(){
+    return (this.config.textWhite===true?' class="white" ':'');
   },
 
 	getScripts: function() {

@@ -44,14 +44,14 @@
     var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; tempName="";
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
-       var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table>';
-       var power='<header class="module-header">' + this.config.energyTitle + '</header><table>';
-       var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table>';
-       var co ='<header class="module-header">' + this.config.coTitle + '</header><table>';
-       var blinds ='<header class="module-header">' + this.config.moduleTitle + '</header><table>';
+       var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
+       var power='<header class="module-header">' + this.config.energyTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
+       var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
+       var co ='<header class="module-header">' + this.config.coTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
+       var blinds ='<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
     } else {
        // make a single table without suBMenus
-       text += '<header class="module-header">' + this.config.moduleTitle + '</header><table class="white">';
+       text += '<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour(this.config.textWhite)+'>';
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0;
@@ -83,7 +83,7 @@
            if (dev.Type.indexOf('Temp') >- 1){
               // add to make sure temperature is added for display
               tempCount++;
-              therm += '<tr><td class="small" '+this.setTextColour+'>' + dev.Name  +'</td><td class="small '+ (dev.Temp< 0.6?'red':'')+'" '+this.setTextColour+'>' + parseFloat(dev.Temp).toFixed(1);
+              therm += '<tr><td class="small" >' + dev.Name  +'</td><td class="small '+ (dev.Temp< 0.6?'red':'')+'" >' + parseFloat(dev.Temp).toFixed(1);
               therm += '&deg; <i class="fa fa-thermometer-half"></i></td></tr>';
               // set a temporary name to prevent device names end double in groups
               tempName = dev.Name;
@@ -108,13 +108,13 @@
                 default:
                     icon="fa-lightbulb-o"
               }
-              power += '<tr><td class="small"'+this.setTextColour+'>' + dev.Name + '</td><td class="small "'+this.setTextColour+'><i class="fa ' + icon + '"></i></td></tr>';
+              power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa ' + icon + '"></i></td></tr>';
           }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               // add to make sure blinds are added for display
               blindsCount++;
               // use icons arrow up for open arrow down for close (no need for translation)
-              blinds += '<tr><td class="small"'+this.setTextColour+'>' + dev.Name  +'</td><td class="small ' + (dev.Status=="Closed"?'yellow':'')+'"'+this.setTextColour+'><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
+              blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
           }
           if (dev.BatteryLevel <= this.config.batteryThreshold) {
               // add to make sure battery level is added for display
@@ -129,7 +129,7 @@
                   batteryIcon = "empty"
               }
               // if level is 8% lower then threshold the color the device Name red
-              batt += '<tr><td class="small '+(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'"'+this.setTextColour+'>' + dev.Name + '</td><td class="small '+(dev.BatteryLevel< 15?'red':'') + '"'+this.setTextColour+'><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%</td></tr>';
+              batt += '<tr><td class="small '+(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + '</td><td class="small '+(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');
@@ -138,13 +138,13 @@
                  coCount++;
                  // if level is 300 above thresholt then color ppm in red
                  alarmLvl=this.config.coThreshold + 300;
-                 co += '<tr><td class="small"'+this.setTextColour+'>' + dev.Name  +'</td><td class="small '+(pts[0] > alarmLvl?'red':'')+'"'+this.setTextColour+'>' + dev.Data + '</td></tr>';
+                 co += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(pts[0] > alarmLvl?'red':'')+'">' + dev.Data + '</td></tr>';
               }
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
               // add to make sure humidity is added to temperature for display
               tempCount++;
-              therm += '<tr><td class="small"'+this.setTextColour+'>' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small"'+this.setTextColour+'>';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small">';
               therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
               // set a temporary name to prevent device names end double in groups
               tempName = dev.Name;
@@ -152,7 +152,7 @@
           if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
               // add to make sure barometric pressure is added to temperature for display
               tempCount++;
-              therm += '<tr><td class="small"'+this.setTextColour+'>' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small"'+this.setTextColour+'>';
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small">';
               therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
           }
       }
@@ -175,9 +175,9 @@
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
     if (powerUse>0 && this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text += '<table>'; }
-          text += '<tr><td class="small"'+this.setTextColour+'>'+ this.config.energyNow +'</td><td class="small"'+this.setTextColour+'>' + parseFloat(powerUse).toFixed(1) + ' Watt</td></tr>';
-          text += '<tr><td class="small"'+this.setTextColour+'>'+ this.config.energyToday +'</td><td class="small"'+this.setTextColour+'>' + parseFloat(todayEnergy).toFixed(3) + ' kWh</td></tr>';
-          text += '<tr><td class="small"'+this.setTextColour+'>'+ this.config.energyTotal +'</td><td class="small"'+this.setTextColour+'>' + parseFloat(usedEnergy).toFixed(1) + ' kWh</td></tr>';
+          text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' Watt</td></tr>';
+          text += '<tr><td class="small">'+ this.config.energyToday +'</td><td class="small">' + parseFloat(todayEnergy).toFixed(3) + ' kWh</td></tr>';
+          text += '<tr><td class="small">'+ this.config.energyTotal +'</td><td class="small">' + parseFloat(usedEnergy).toFixed(1) + ' kWh</td></tr>';
           if (this.config.subMenus === true) { text += '</table>'; }
     }
     // if there were no subMenus then we must close the single table
@@ -197,8 +197,8 @@
 		loading: '<div class="dimmed light small">Loading Domoticz data ....</div>'
 
 	},
-  setTextColour: function(){
-    return (this.config.textWhite?' style="color:white;" ':'');
+  setTextColour: function(YesOrNo){
+    return (YesOrNo===true?' class="white"':'');
   },
 
 	getScripts: function() {

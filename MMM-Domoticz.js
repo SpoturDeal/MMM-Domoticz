@@ -198,7 +198,7 @@
 
 	},
   setTextColour: function(){
-    return (this.config.textWhite === true?' style="color:white;" ':'');
+    return (this.config.textWhite?' style="color:white;" ':'');
   },
 
 	getScripts: function() {

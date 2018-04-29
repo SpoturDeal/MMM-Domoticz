@@ -152,7 +152,11 @@
           if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
               // add to make sure barometric pressure is added to temperature for display
               tempCount++;
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small">';
+	      var hookdir='└─';
+	      if(this.data.position.endsWith("left")){	  
+	         hookdir='─┘';
+       	      }	  
+              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:hookdir)  +'</td><td class="small">';
               therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
           }
       }

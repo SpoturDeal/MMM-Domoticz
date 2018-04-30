@@ -13,7 +13,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 
 |Option|Description|
 |---|---|
-|`updateInterval`|How fast do you like updates.<br>**Type:** `Integer`<br>**Default:** <i>45</i>| seconds 
+|`updateInterval`|How fast do you like updates.<br>**Type:** `Integer`<br>**Default:** <i>45</i>| seconds
 |`apiBase`|The IP Address of your Domoticz.<br>**Type:** `string`<br>**Default:** <i>192.168.xxx.xxx</i>|
 |`apiPort`|The port your Domiticz uses.<br>**Type:** `Integer`<br>**Default:** <i>8080</i>|
 |`apiUser`| The username you use to login on your Domoticz. <br>**Type:** `string`<br>**Default:** <i>XXXX</i>
@@ -33,6 +33,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 |`textWhite`| Set the text colour to white instead of grey. <br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
+|`groupSensors`| Group the values of one sensor. If **true** the name will not repeat and a hook is shown. On position left it sometimes give strange effects.<br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
+
 Here is an example of an entry in `config.js`
 ```
 {
@@ -43,7 +45,7 @@ Here is an example of an entry in `config.js`
 		apiBase: '192.168.xxx.xxx',
 		apiPort: 8080,
 		apiUser: "XXXX",
-        	apiPw: "xxxx",
+    apiPw: "xxxx",
 		moduleTitle: "My smart home by Domoticz",
 		energyTitle: "Energy used by",
 		batteryTitle: "Battery level",
@@ -53,11 +55,12 @@ Here is an example of an entry in `config.js`
 		energyTotal: "Energy used",
 		energyToday: "Energy used today",
 		batteryThreshold: 20,
-                coThreshold: 650,
+    coThreshold: 650,
 		subMenus: true,
 		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage'],   
 		excludedDevices: ['none','add your own'],  // Device that will not be shown
-		textWhite: false
+		textWhite: false,
+		groupSensors: false
 	}
 }
 ```
@@ -66,7 +69,7 @@ Here is an example of an entry in `config.js`
 #### Display type: details
 ![Screenshot of detail mode](/screendomoticz.png?raw=true )
 
-## Use an ESP32 WiFi module to controll your shutters 
+## Use an ESP32 WiFi module to controll your shutters
 <a href="https://github.com/SpoturDeal/ESP32Stepper">Control your shutter with WiFi asnd ESP32 module</a>
 
 ## 22th April 2018
@@ -74,12 +77,12 @@ Added Humidity and Barometric pressure. Must be added in config.js to be shown g
 
 ## 23th April 2018
 Added current use of Watts please update config.js showItems with 'usage'
-Added total and todays use of energy in kWh. 
+Added total and todays use of energy in kWh.
 
 The MIT License (MIT)
 =====================
 
-Copyright © 2018 SpoturDeal - Carl 
+Copyright © 2018 SpoturDeal - Carl
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

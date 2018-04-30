@@ -21,9 +21,10 @@
         showItems: ['temperature','energy','battery','co','blinds','humdity','baro','usage'],
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
-        subMenus: false,                              // true or false
+        subMenus: false,                             // true or false
         excludeDevices: ['none'],                    // Devices you don`t want to see
-        textWhite: false
+        textWhite: false,
+        groupSensors:false                           // group the data from a single Sensor
 	},
 	start: function() {
 		Log.info('Starting module: ' + this.name);
@@ -41,7 +42,7 @@
 	render: function(data){
     // recieved data
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; tempName="";
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName="";
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
        var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table'+this.setTextColour()+'>';
@@ -143,21 +144,39 @@
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
               // add to make sure humidity is added to temperature for display
-              tempCount++;
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:'└─')  +'</td><td class="small">';
-              therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
-              // set a temporary name to prevent device names end double in groups
-              tempName = dev.Name;
+              if (this.config.groupSensors===true){
+                 tempCount++;
+                 var hookdir='└─';
+                 if(this.data.position.endsWith("left")){
+                     hookdir='─┘';
+                 }
+                 therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:hookdir)  +'</td><td class="small">';
+                 therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+                 // set a temporary name to prevent device names end double in groups
+                 tempName = dev.Name;
+              } else {
+                 if (this.config.showItems.indexOf('humidity')){
+                    humi += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
+                    humi += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+                 }
+              }
           }
           if (dev.Type.indexOf('Baro') >- 1 && this.config.showItems.indexOf('baro') !== -1){
               // add to make sure barometric pressure is added to temperature for display
-              tempCount++;
-	      var hookdir='└─';
-	      if(this.data.position.endsWith("left")){	  
-	         hookdir='─┘';
-       	      }	  
-              therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:hookdir)  +'</td><td class="small">';
-              therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
+              if (this.config.groupSensors===true){
+                 tempCount++;
+	               var hookdir='└─';
+	               if(this.data.position.endsWith("left")){
+	                   hookdir='─┘';
+       	         }
+                 therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:hookdir)  +'</td><td class="small">';
+                 therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
+              } else {
+                 if (this.config.showItems.indexOf('baro')){
+                    baro += '<tr><td class="small">' + dev.Name +'</td><td class="small">';
+                    baro += parseInt(dev.Barometer) + ' hPa</td></tr>';
+                 }
+              }
           }
       }
 
@@ -165,7 +184,7 @@
     }
     // for subMenu close all tables
     if (this.config.subMenus === true) {
-       therm += '</table>';
+       therm += humi+baro+'</table>';
        power += '</table>';
        batt += '</table>';
        blinds +='</table>';
@@ -177,7 +196,7 @@
     if (blindsCount > 0){  text += (this.config.showItems.indexOf('blinds') !== -1?blinds:'');  }
     if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
-    if (powerUse>0 && this.config.showItems.indexOf('usage')!== -1 ){
+    if (this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text += '<table>'; }
           text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' Watt</td></tr>';
           text += '<tr><td class="small">'+ this.config.energyToday +'</td><td class="small">' + parseFloat(todayEnergy).toFixed(3) + ' kWh</td></tr>';

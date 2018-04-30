@@ -182,9 +182,10 @@
 
 
     }
+    therm += humi + baro;
     // for subMenu close all tables
     if (this.config.subMenus === true) {
-       therm += humi+baro+'</table>';
+       therm += '</table>';
        power += '</table>';
        batt += '</table>';
        blinds +='</table>';

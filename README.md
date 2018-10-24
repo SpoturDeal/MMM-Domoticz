@@ -13,26 +13,29 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 
 |Option|Description|
 |---|---|
-|`updateInterval`|How fast do you like updates.<br>**Type:** `Integer`<br>**Default:** <i>45</i>| seconds
+|`updateInterval`|How fast do you like updates.<br>**Type:** `Integer`<br>**Default:** <i>45</i>| seconds |
 |`apiBase`|The IP Address of your Domoticz.<br>**Type:** `string`<br>**Default:** <i>192.168.xxx.xxx</i>|
 |`apiPort`|The port your Domiticz uses.<br>**Type:** `Integer`<br>**Default:** <i>8080</i>|
-|`apiUser`| The username you use to login on your Domoticz. <br>**Type:** `string`<br>**Default:** <i>XXXX</i>
-|`apiPw`| The password you use to login.. <br>**Type:** `string`<br>**Default:** <i>xxxx</i>
-|`energyTitle`| Energy title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Energy used by</i>
-|`batteryTitle`| Battery title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Battery level</i>
-|`coTitle`| CO2 title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>CO2 level</i>
-|`blindsTitle`| Blinds title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Blinds</i>
-|`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>
-|`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>
-|`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>
-|`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>My smart home by Domoticz</i>
-|`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>
-|`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>|
+|`apiUser`| The username you use to login on your Domoticz. <br>**Type:** `string`<br>**Default:** <i>XXXX</i>|
+|`apiPw`| The password you use to login.. <br>**Type:** `string`<br>**Default:** <i>xxxx</i>|
+|`energyTitle`| Energy title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Energy used by</i>|
+|`batteryTitle`| Battery title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Battery level</i>|
+|`coTitle`| CO2 title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>CO2 level</i>|
+|`blindsTitle`| Blinds title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Blinds</i>|
+|`voltageTitle`| Voltage title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Voltage/Current</i>|
+|`alarmTitle`| Alarm title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Alarm</i>|
+|`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>|
+|`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
+|`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>|
+|`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>My smart home by Domoticz</i>|
+|`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>|
+|`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>||
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
-|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage` <br> **Default** <i>`temperature, energy`</i> |
-|`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>
+|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm` <br> **Default** <i>`temperature, energy`</i> |
+|`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 |`textWhite`| Set the text colour to white instead of grey. <br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
+|`alarmOffLabel`|Label if alarm is off. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Disarmed</i>|
 |`groupSensors`| Group the values of one sensor. If **true** the name will not repeat and a hook is shown. On position left it sometimes give strange effects.<br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
@@ -57,9 +60,10 @@ Here is an example of an entry in `config.js`
 		batteryThreshold: 20,
     coThreshold: 650,
 		subMenus: true,
-		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage'],   
-		excludedDevices: ['none','add your own'],  // Device that will not be shown
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage,'voltage','alarm'],   
+		excludeDevices: ['none','add your own'],  // Device that will not be shown
 		textWhite: false,
+		alarmOffLabel: "Disabled",
 		groupSensors: false
 	}
 }
@@ -78,6 +82,11 @@ Added Humidity and Barometric pressure. Must be added in config.js to be shown g
 ## 23th April 2018
 Added current use of Watts please update config.js showItems with 'usage'
 Added total and todays use of energy in kWh.
+
+## 24th October 2018
+Added alarm status requested by jacha05
+Added Voltage and current requested by offgridonrocker
+Changed error in example config.js (typo in excludedDevices is now excludeDevices).
 
 The MIT License (MIT)
 =====================

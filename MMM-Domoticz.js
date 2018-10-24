@@ -14,11 +14,15 @@
         energyTitle: "Energy used by",               // The tile for the energy use part
         batteryTitle: "Battery level",
         blindsTitle:  "Blinds",
+        voltageTitle: "Voltage/Current",
+        alarmTitle: "Disarmed",
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
         energyToday: "Today used",                   // Label for energy used today
-        showItems: ['temperature','energy','battery','co','blinds','humdity','baro','usage'],
+        showItems: ['temperature','energy','battery','co',
+                    'blinds','humdity','baro','usage','voltage','alarm'],
+        alarmOffLabel: "Disarmed",            
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
         subMenus: false,                             // true or false
@@ -42,7 +46,7 @@
 	render: function(data){
     // recieved data
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName="";
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm="";
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
        var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table'+this.setTextColour()+'>';
@@ -56,7 +60,7 @@
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0;
-    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;
+    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;
     // loop the length of the received json file
     for (i=0;i<data.result.length;i++){
         // set for one device
@@ -132,6 +136,18 @@
               // if level is 8% lower then threshold the color the device Name red
               batt += '<tr><td class="small '+(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + '</td><td class="small '+(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%</td></tr>';
           }
+          if (dev.subType == "Voltage" || dev.subType == "Current"){
+              // For both current and voltage */
+              voltageCount++;
+              voltage += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + dev.Data+'"></td></tr>';
+          }
+          if (dev.Name == "Domoticz Security Panel"){
+              // for domoticz alarm 
+              alarmCount++;
+              pts=dev.Data.split(' ');
+              // The name Normal replaced by setting from config
+              alarm += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + (dev.Data=="Normal"?this.config.alarmOffLabel:dev.Data)+'"></td></tr>';
+          }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');
               if (pts[0] > this.config.coThreshold){
@@ -195,6 +211,8 @@
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }
     if (powerCount > 0){   text += (this.config.showItems.indexOf('energy') !== -1?power:''); }
     if (blindsCount > 0){  text += (this.config.showItems.indexOf('blinds') !== -1?blinds:'');  }
+    if (alarmCount > 0){  text += (this.config.showItems.indexOf('alarm') !== -1?alarm:'');  }
+    if (voltageCount > 0){  text += (this.config.showItems.indexOf('voltage') !== -1?voltage:'');  }
     if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
     if (this.config.showItems.indexOf('usage')!== -1 ){

@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.07 24th April 2018
+ * version 1.07 25th October 2018
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
@@ -136,10 +136,14 @@
               // if level is 8% lower then threshold the color the device Name red
               batt += '<tr><td class="small '+(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + '</td><td class="small '+(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%</td></tr>';
           }
-          if (dev.subType == "Voltage" || dev.subType == "Current"){
-              // For both current and voltage */
-              voltageCount++;
-              voltage += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + dev.Data+'"></td></tr>';
+          if (dev.Type=="General"){
+            if (dev.subType){
+              if (dev.subType == "Voltage" || dev.subType == "Current"){
+                 // For both current and voltage */
+                 voltageCount++;
+                 voltage += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + dev.Data+'"></td></tr>';
+              }
+            }
           }
           if (dev.Name == "Domoticz Security Panel"){
               // for domoticz alarm 

@@ -15,7 +15,8 @@
         batteryTitle: "Battery level",
         blindsTitle:  "Blinds",
         voltageTitle: "Voltage/Current",
-        alarmTitle: "Current alarm status",
+        alarmTitle: "Alarm system",
+        alarmLabel: "Current alarm status",
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
@@ -54,6 +55,8 @@
        var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table'+this.setTextColour()+'>';
        var co ='<header class="module-header">' + this.config.coTitle + '</header><table'+this.setTextColour()+'>';
        var blinds ='<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour()+'>';
+       var alarm ='<header class="module-header">' + this.config.alarmTitle + '</header><table'+this.setTextColour()+'>';
+
     } else {
        // make a single table without suBMenus
        text += '<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour()+'>';
@@ -161,7 +164,7 @@
               } else {
                  var showTxt = dev.Status;
               }
-              alarm += '<tr><td class="small">' + this.config.alarmTitle  +'</td><td class="small '+(disAm==0?'red':'green') +'">' + showTxt +'</td></tr>';
+              alarm += '<tr><td class="small">' + this.config.alarmLabel  +'</td><td class="small '+(disAm==0?'red':'green') +'">' + showTxt +'</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');
@@ -221,6 +224,7 @@
        batt += '</table>';
        blinds +='</table>';
        co += '</table>';
+       alarm += '</table>';
     }
     // Check which items are chose in config.js then add for Mirror
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }

@@ -156,15 +156,15 @@
               var disAm = 0;
               if (dev.Data=='Normal' || dev.Status=='Normal'){
                  var showTxt = this.config.alarmOffLabel;
+		    disAm=1;
                  if (!this.config.alarmOffLabel){
                     // force this label if config fails
                     showTxt='Disarmed';
-                    disAm=1;
                  }
               } else {
                  var showTxt = dev.Status;
               }
-              alarm += '<tr><td class="small">' + this.config.alarmLabel  +'</td><td class="small '+(disAm==0?'red':'green') +'">' + showTxt +'</td></tr>';
+              alarm += '<tr><td class="small">' + this.config.alarmLabel  +'</td><td class="small '+(disAm==0?'red':'') +'">' + showTxt +'</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

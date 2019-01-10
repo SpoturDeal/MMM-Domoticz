@@ -23,7 +23,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`coTitle`| CO2 title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>CO2 level</i>|
 |`blindsTitle`| Blinds title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Blinds</i>|
 |`voltageTitle`| Voltage title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Voltage/Current</i>|
-|`alarmTitle`| Alarm title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Alarm</i>|
+|`alarmTitle`| Alarm title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Alarm system</i>|
+|`alarmLabel`| Alarm label. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Current alarm status:</i>|
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>|
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
 |`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>|

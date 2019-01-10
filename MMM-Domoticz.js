@@ -179,7 +179,7 @@
               } else {
                   var showTxt = dev.Status;
               }
-              alarm += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + showTxt +'"></td></tr>';
+              alarm += '<tr><td class="small">' + dev.Name  +'</td><td class="small ">' + showTxt +'</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

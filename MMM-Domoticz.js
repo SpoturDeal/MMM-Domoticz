@@ -48,18 +48,27 @@
     // recieved data
     var text = '<div>';
     var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm="";
+    // set the most used html parts as variables
+    var headClass='<header class="module-header">';
+    var headTab='</header><table'+this.setTextColour()+'>';
+    var trClassSmall='<tr><td class="small">';
+    var trClassOpenSmall='<tr><td class="small ';
+    var tdClassOpenSmall='</td><td class="small ';
+    var tdEndOpenSmall='" >';
+    var tdEndClassSmall='</td><td class="small">';
+    var endLine='</td></tr>';
+    var endTable='</table>';
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
-       var therm ='<header class="module-header">' + this.config.temperatureTitle + '</header><table'+this.setTextColour()+'>';
-       var power='<header class="module-header">' + this.config.energyTitle + '</header><table'+this.setTextColour()+'>';
-       var batt ='<header class="module-header">' + this.config.batteryTitle + '</header><table'+this.setTextColour()+'>';
-       var co ='<header class="module-header">' + this.config.coTitle + '</header><table'+this.setTextColour()+'>';
-       var blinds ='<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour()+'>';
-       var alarm ='<header class="module-header">' + this.config.alarmTitle + '</header><table'+this.setTextColour()+'>';
-
+       therm = headClass + this.config.temperatureTitle + headTab;
+       power = headClass + this.config.energyTitle + headTab;
+       batt = headClass + this.config.batteryTitle + headTab;
+       co = headClass + this.config.coTitle + headTab;
+       blinds = headClass + this.config.moduleTitle + headTab;
+       alarm = headClass + this.config.alarmTitle + headTab;
     } else {
        // make a single table without suBMenus
-       text += '<header class="module-header">' + this.config.moduleTitle + '</header><table'+this.setTextColour()+'>';
+       text += headClass + this.config.moduleTitle + headTab;
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0;
@@ -91,8 +100,8 @@
            if (dev.Type.indexOf('Temp') >- 1){
               // add to make sure temperature is added for display
               tempCount++;
-              therm += '<tr><td class="small" >' + dev.Name  +'</td><td class="small '+ (dev.Temp< 0.6?'red':'')+'" >' + parseFloat(dev.Temp).toFixed(1);
-              therm += '&deg; <i class="fa fa-thermometer-half"></i></td></tr>';
+              therm += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Temp< 0.6?'red':'')+ tdEndOpenSmall + parseFloat(dev.Temp).toFixed(1);
+              therm += '&deg; <i class="fa fa-thermometer-half"></i>' + endLine;
               // set a temporary name to prevent device names end double in groups
               tempName = dev.Name;
            } else if (dev.Data == "On" || dev.Data == "Set Level") {
@@ -116,13 +125,13 @@
                 default:
                     icon="fa-lightbulb-o"
               }
-              power += '<tr><td class="small">' + dev.Name + '</td><td class="small "><i class="fa ' + icon + '"></i></td></tr>';
+              power += trClassSmall + dev.Name + tdEndClassSmall+'<i class="fa ' + icon + '"></i>' + endLine;
           }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               // add to make sure blinds are added for display
               blindsCount++;
               // use icons arrow up for open arrow down for close (no need for translation)
-              blinds += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i></td></tr>';
+              blinds += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i>' + endLine;
           }
           if (dev.BatteryLevel <= this.config.batteryThreshold) {
               // add to make sure battery level is added for display
@@ -137,14 +146,14 @@
                   batteryIcon = "empty"
               }
               // if level is 8% lower then threshold the color the device Name red
-              batt += '<tr><td class="small '+(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + '</td><td class="small '+(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%</td></tr>';
+              batt += trClassOpenSmall +(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + tdEndOpenSmall +(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%'  + endLine;
           }
           if (dev.Type=="General"){
             if (dev.subType){
               if (dev.subType == "Voltage" || dev.subType == "Current"){
                  // For both current and voltage */
                  voltageCount++;
-                 voltage += '<tr><td class="small">' + dev.Name  +'</td><td class="small ' + dev.Data+'"></td></tr>';
+                 voltage += trClassSmall + dev.Name  + tdClassOpenSmall + dev.Data+'">' + endLine;
               }
             }
           }
@@ -156,7 +165,7 @@
               var disAm = 0;
               if (dev.Data=='Normal' || dev.Status=='Normal'){
                  var showTxt = this.config.alarmOffLabel;
-		    disAm=1;
+                 disAm = 1;
                  if (!this.config.alarmOffLabel){
                     // force this label if config fails
                     showTxt='Disarmed';
@@ -164,7 +173,7 @@
               } else {
                  var showTxt = dev.Status;
               }
-              alarm += '<tr><td class="small">' + this.config.alarmLabel  +'</td><td class="small '+(disAm==0?'red':'') +'">' + showTxt +'</td></tr>';
+              alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');
@@ -173,7 +182,7 @@
                  coCount++;
                  // if level is 300 above thresholt then color ppm in red
                  alarmLvl=this.config.coThreshold + 300;
-                 co += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(pts[0] > alarmLvl?'red':'')+'">' + dev.Data + '</td></tr>';
+                 co += trClassSmall + dev.Name  + tdClassOpenSmall +(pts[0] > alarmLvl?'red':'')+ tdEndOpenSmall + dev.Data  + endLine;
               }
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
@@ -184,14 +193,14 @@
                  if(this.data.position.endsWith("left")){
                      hookdir='─┘';
                  }
-                 therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:hookdir)  +'</td><td class="small">';
-                 therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+                 therm += trClassSmall + (tempName != dev.Name?dev.Name:hookdir) + tdEndClassSmall;
+                 therm += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i>' + endLine;
                  // set a temporary name to prevent device names end double in groups
                  tempName = dev.Name;
               } else {
                  if (this.config.showItems.indexOf('humidity')){
-                    humi += '<tr><td class="small">' + dev.Name  +'</td><td class="small">';
-                    humi += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i></td></tr>';
+                    humi += trClassSmall + dev.Name  + tdEndClassSmall;
+                    humi += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i>' + endLine;
                  }
               }
           }
@@ -203,12 +212,12 @@
 	               if(this.data.position.endsWith("left")){
 	                   hookdir='─┘';
        	         }
-                 therm += '<tr><td class="small">' + (tempName != dev.Name?dev.Name:hookdir)  +'</td><td class="small">';
-                 therm += parseInt(dev.Barometer) + ' hPa</td></tr>';
+                 therm += trClassSmall + (tempName != dev.Name?dev.Name:hookdir)  + tdEndClassSmall;
+                 therm += parseInt(dev.Barometer) + ' hPa' + endLine;
               } else {
                  if (this.config.showItems.indexOf('baro')){
-                    baro += '<tr><td class="small">' + dev.Name +'</td><td class="small">';
-                    baro += parseInt(dev.Barometer) + ' hPa</td></tr>';
+                    baro += trClassSmall + dev.Name + tdEndClassSmall;
+                    baro += parseInt(dev.Barometer) + ' hPa' + endLine;
                  }
               }
           }
@@ -219,12 +228,12 @@
     therm += humi + baro;
     // for subMenu close all tables
     if (this.config.subMenus === true) {
-       therm += '</table>';
-       power += '</table>';
-       batt += '</table>';
-       blinds +='</table>';
-       co += '</table>';
-       alarm += '</table>';
+       therm += endTable;
+       power += endTable;
+       batt += endTable;
+       blinds += endTable;
+       co += endTable;
+       alarm += endTable;
     }
     // Check which items are chose in config.js then add for Mirror
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }
@@ -235,15 +244,15 @@
     if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
     if (this.config.showItems.indexOf('usage')!== -1 ){
-          if (this.config.subMenus === true) { text += '<table>'; }
-          text += '<tr><td class="small">'+ this.config.energyNow +'</td><td class="small">' + parseFloat(powerUse).toFixed(1) + ' Watt</td></tr>';
-          text += '<tr><td class="small">'+ this.config.energyToday +'</td><td class="small">' + parseFloat(todayEnergy).toFixed(3) + ' kWh</td></tr>';
-          text += '<tr><td class="small">'+ this.config.energyTotal +'</td><td class="small">' + parseFloat(usedEnergy).toFixed(1) + ' kWh</td></tr>';
-          if (this.config.subMenus === true) { text += '</table>'; }
+          if (this.config.subMenus === true) { text +=  endTable; }
+          text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
+          text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
+          text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
+          if (this.config.subMenus === true) { text += endTable; }
     }
     // if there were no subMenus then we must close the single table
     if (this.config.subMenus !== true) {
-        text +='</table>';
+        text += endTable;
     }
     text += '</div>';
 

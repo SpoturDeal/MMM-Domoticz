@@ -15,7 +15,7 @@
         batteryTitle: "Battery level",
         blindsTitle:  "Blinds",
         voltageTitle: "Voltage/Current",
-        alarmTitle: "Disarmed",
+        alarmTitle: "Current alarm status",
         coTitle: "CO2 level",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
@@ -150,16 +150,18 @@
               alarmCount++;
               pts=dev.Data.split(' ');
               // The name Normal replaced by setting from config
+              var disAm = 0;
               if (dev.Data=='Normal' || dev.Status=='Normal'){
                  var showTxt = this.config.alarmOffLabel;
                  if (!this.config.alarmOffLabel){
                     // force this label if config fails
                     showTxt='Disarmed';
+                    disAm=1;
                  }
               } else {
                  var showTxt = dev.Status;
               }
-              alarm += '<tr><td class="small">' + dev.Name  +'</td><td class="small ">' + showTxt +'</td></tr>';
+              alarm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(disAm==0?'red':'green') +'">' + showTxt +'</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

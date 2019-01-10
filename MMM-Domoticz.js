@@ -161,7 +161,7 @@
               } else {
                  var showTxt = dev.Status;
               }
-              alarm += '<tr><td class="small">' + dev.Name  +'</td><td class="small '+(disAm==0?'red':'green') +'">' + showTxt +'</td></tr>';
+              alarm += '<tr><td class="small">' + this.config.alarmTitle  +'</td><td class="small '+(disAm==0?'red':'green') +'">' + showTxt +'</td></tr>';
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

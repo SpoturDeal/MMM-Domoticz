@@ -182,11 +182,11 @@
                  var showTxt = dev.Status;
               }
               // next line is original
-              // alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
+              alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
               
               //alarm += trClassOpenSmall +(disAm==0?'red':'')+ tdEndSmall + this.config.alarmLabel + tdEndOpenSmall +(disAm==0?'red':'') + '"><i class="fa fa-'+(disAm==1?'un':'')+'lock"></i> '  + endLine;
               // next line proposed by htilly (but not good for right side of screen)
-              alarm += '<tr><td class="small">' + showTxt  +'</td><td class="small ' + (dev.Status=="Normal"?'' + '"><i class="fa fa-unlock"></i></td></tr>':'red' + '"><i class="fa fa-lock"></i></td></tr>');
+              //alarm += '<tr><td class="small">' + showTxt  +'</td><td class="small ' + (dev.Status=="Normal"?'' + '"><i class="fa fa-unlock"></i></td></tr>':'red' + '"><i class="fa fa-lock"></i></td></tr>');
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

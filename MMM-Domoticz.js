@@ -48,7 +48,7 @@
 	render: function(data){
     // recieved data
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";"
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";
     // set the most used html parts as variables
     var headClass='<header class="module-header">';
     var headTab='</header><table'+this.setTextColour()+' class="sub-header">';
@@ -139,7 +139,7 @@
               // add to make sure sensors are added for display
               sensorCount++;
               // use icons toggle on for open toggle off for close (no need for translation)
-              sensor += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Closed"?'off':'on') + '">' + endLine;
+              //sensor += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Closed"?'off':'on') + '">' + endLine;
           }
           if (dev.BatteryLevel <= this.config.batteryThreshold) {
               // add to make sure battery level is added for display
@@ -182,9 +182,9 @@
                  var showTxt = dev.Status;
               }
               // next line is original
-              alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
+              //alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
               
-              //alarm += trClassOpenSmall +(disAm==0?'red':'')+ tdEndSmall + this.config.alarmLabel + tdEndOpenSmall +(disAm==0?'red':'') + '"><i class="fa fa-'+(disAm==1?'un':'')+'lock"></i> '  + endLine;
+              alarm += trClassOpenSmall +(disAm==0?'red':'')+ tdEndSmall + this.config.alarmLabel + tdEndOpenSmall +(disAm==0?'red':'') + '"><i class="fa fa-'+(disAm==1?'un':'')+'lock"></i> '  + endLine;
               // next line proposed by htilly (but not good for right side of screen)
               //alarm += '<tr><td class="small">' + showTxt  +'</td><td class="small ' + (dev.Status=="Normal"?'' + '"><i class="fa fa-unlock"></i></td></tr>':'red' + '"><i class="fa fa-lock"></i></td></tr>');
           }

@@ -18,11 +18,12 @@
         alarmTitle: "Alarm system",
         alarmLabel: "Current alarm status",
         coTitle: "CO2 level",
+        sensorTitle: "Window/Door sensors",
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
         energyToday: "Today used",                   // Label for energy used today
         showItems: ['temperature','energy','battery','co',
-                    'blinds','humdity','baro','usage','voltage','alarm'],
+                    'blinds','humdity','baro','usage','voltage','alarm','sensor'],
         alarmOffLabel: "Disarmed",            
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
@@ -47,10 +48,10 @@
 	render: function(data){
     // recieved data
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm="";
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";"
     // set the most used html parts as variables
     var headClass='<header class="module-header">';
-    var headTab='</header><table'+this.setTextColour()+'>';
+    var headTab='</header><table'+this.setTextColour()+' class="sub-header">';
     var trClassSmall='<tr><td class="small">';
     var trClassOpenSmall='<tr><td class="small ';
     var tdClassOpenSmall='</td><td class="small ';
@@ -66,13 +67,14 @@
        co = headClass + this.config.coTitle + headTab;
        blinds = headClass + this.config.moduleTitle + headTab;
        alarm = headClass + this.config.alarmTitle + headTab;
+       sensor = headClass + this.config.sensorTitle + headTab;
     } else {
        // make a single table without suBMenus
        text += headClass + this.config.moduleTitle + headTab;
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0;
-    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;
+    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;
     // loop the length of the received json file
     for (i=0;i<data.result.length;i++){
         // set for one device
@@ -133,6 +135,12 @@
               // use icons arrow up for open arrow down for close (no need for translation)
               blinds += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i>' + endLine;
           }
+          if (dev.Type == "Light/Switch" && (dev.SwitchType == "Door Contact" || dev.SwitchType == "Contact")){
+              // add to make sure sensors are added for display
+              sensorCount++;
+              // use icons toggle on for open toggle off for close (no need for translation)
+              sensor += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Closed"?'off':'on') + '">' + endLine;
+          }
           if (dev.BatteryLevel <= this.config.batteryThreshold) {
               // add to make sure battery level is added for display
               batteryCount++;
@@ -173,7 +181,12 @@
               } else {
                  var showTxt = dev.Status;
               }
-              alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
+              // next line is original
+              // alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
+              
+              alarm += trClassOpenSmall +(disAm==0?'red':'')+ tdEndSmall + this.config.alarmLabel + tdEndOpenSmall +(disAm==0?'red':'') + '"><i class="fa fa-'+(disAm==1?'un':'')+'lock"></i> '  + endLine;
+              // next line proposed by htilly (but not good for right side of screen)
+              // alarm += '<tr><td class="small">' + showTxt  +'</td><td class="small ' + (dev.Status=="Normal"?'' + '"><i class="fa fa-unlock"></i></td></tr>':'red' + '"><i class="fa fa-lock"></i></td></tr>');
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');
@@ -234,6 +247,7 @@
        blinds += endTable;
        co += endTable;
        alarm += endTable;
+       sensor += endTable;
     }
     // Check which items are chose in config.js then add for Mirror
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }
@@ -243,6 +257,7 @@
     if (voltageCount > 0){  text += (this.config.showItems.indexOf('voltage') !== -1?voltage:'');  }
     if (batteryCount > 0){ text += (this.config.showItems.indexOf('battery') !== -1?batt:''); }
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
+    if (sensorCount > 0){  text += (this.config.showItems.indexOf('sensor') !== -1?sensor:'');  }
     if (this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text +=  endTable; }
           text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;

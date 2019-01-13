@@ -154,7 +154,7 @@
                   batteryIcon = "empty"
               }
               // if level is 8% lower then threshold the color the device Name red
-              batt += trClassOpenSmall +(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + tdEndOpenSmall +(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%'  + endLine;
+              batt += trClassOpenSmall +(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + tdClassOpenSmall +(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%'  + endLine;
           }
           if (dev.Type=="General"){
             if (dev.subType){
@@ -181,12 +181,9 @@
               } else {
                  var showTxt = dev.Status;
               }
-              // next line is original
-              // alarm += trClassSmall + this.config.alarmLabel + tdClassOpenSmall +(disAm==0?'red':'') + tdEndOpenSmall + showTxt  + endLine;
+                            
+              alarm += trClassOpenSmall +(disAm==0?'red':'')+ '">' + this.config.alarmLabel + tdEndClassSmall + '<i class="fa fa-'+(disAm==1?'un':'')+'lock"></i>'  + endLine;
               
-              alarm += trClassOpenSmall +(disAm==0?'red':'')+ tdEndOpenSmall + this.config.alarmLabel + tdEndClassSmall + '"><i class="fa fa-'+(disAm==1?'un':'')+'lock"></i>'  + endLine;
-              // next line proposed by htilly (but not good for right side of screen)
-              // alarm += '<tr><td class="small">' + showTxt  +'</td><td class="small ' + (dev.Status=="Normal"?'' + '"><i class="fa fa-unlock"></i></td></tr>':'red' + '"><i class="fa fa-lock"></i></td></tr>');
           }
           if (dev.Type == "Air Quality"){
               pts=dev.Data.split(' ');

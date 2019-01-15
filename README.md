@@ -36,7 +36,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 |`textWhite`| Set the text colour to white instead of grey. <br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
-|`alarmOffLabel`|Label if alarm is off. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Disarmed</i>|
+|`alarmOffLabel`|Label if alarm is off. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Security Disarmed</i>|
+|`alarmOnLabel`|Label if alarm is armed. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Security Armed</i>|
 |`groupSensors`| Group the values of one sensor. If **true** the name will not repeat and a hook is shown. On position left it sometimes give strange effects.<br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
 
 Here is an example of an entry in `config.js`
@@ -61,7 +62,7 @@ Here is an example of an entry in `config.js`
 		batteryThreshold: 20,
     coThreshold: 650,
 		subMenus: true,
-		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage,'voltage','alarm'],   
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage,'voltage','alarm','sensor'],   
 		excludeDevices: ['none','add your own'],  // Device that will not be shown
 		textWhite: false,
 		alarmOffLabel: "Disabled",
@@ -88,6 +89,11 @@ Added total and todays use of energy in kWh.
 Added alarm status requested by jacha05
 Added Voltage and current requested by offgridonrocker
 Changed error in example config.js (typo in excludedDevices is now excludeDevices).
+
+## 15th Januari 2019
+Added Alarm system texts update the config if needed
+Re-Added Sensors made by BlackCatDeployment
+Restructured layout scripts. 
 
 The MIT License (MIT)
 =====================

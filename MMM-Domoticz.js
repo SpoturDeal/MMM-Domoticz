@@ -24,7 +24,8 @@
         energyToday: "Today used",                   // Label for energy used today
         showItems: ['temperature','energy','battery','co',
                     'blinds','humdity','baro','usage','voltage','alarm','sensor'],
-        alarmOffLabel: "Disarmed",            
+        alarmOffLabel: "Security Disarmed",
+        alarmOnLabel: "Security Armed",            
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
         subMenus: false,                             // true or false
@@ -50,7 +51,7 @@
     var text = '<div>';
     var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";
     // set the most used html parts as variables
-    var headClass='<header class="module-header">';
+    var headClass='<header class="module-header sub-header">';
     var headTab='</header><table'+this.setTextColour()+' class="sub-header">';
     var trClassSmall='<tr><td class="small">';
     var trClassOpenSmall='<tr><td class="small ';
@@ -176,13 +177,17 @@
                  disAm = 1;
                  if (!this.config.alarmOffLabel){
                     // force this label if config fails
-                    showTxt='Disarmed';
+                    showTxt='Security Disarmed';
                  }
               } else {
-                 var showTxt = dev.Status;
+                 var showTxt = this.config.alarmOnLabel;
+                 if (!this.config.alarmOnLabel){
+                    // force this label if config fails
+                    showTxt=dev.Status;
+                 }
               }
                             
-              alarm += trClassOpenSmall +(disAm==0?'red':'')+ '">' + this.config.alarmLabel + tdEndClassSmall + '<i class="fa fa-'+(disAm==1?'un':'')+'lock"></i>'  + endLine;
+              alarm += trClassOpenSmall +(disAm==0?'red':'')+ '">' + showTxt + tdEndClassSmall + '&nbsp;<i class="fa fa-'+(disAm==1?'un':'')+'lock"></i>'  + endLine;
               
           }
           if (dev.Type == "Air Quality"){

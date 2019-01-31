@@ -62,7 +62,7 @@ Here is an example of an entry in `config.js`
 		batteryThreshold: 20,
     coThreshold: 650,
 		subMenus: true,
-		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage,'voltage','alarm','sensor'],   
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor'],   
 		excludeDevices: ['none','add your own'],  // Device that will not be shown
 		textWhite: false,
 		alarmOffLabel: "Disabled",

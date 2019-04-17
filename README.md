@@ -29,7 +29,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
 |`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>|
 |`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>My smart home by Domoticz</i>|
-|`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domiticz</i>|
+|`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domoticz</i>|
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>||
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
 |`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm` <br> **Default** <i>`temperature, energy`</i> |

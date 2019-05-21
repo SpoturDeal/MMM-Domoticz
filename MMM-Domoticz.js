@@ -10,7 +10,7 @@
         apiBase: '192.168.xx.xxx',                   // the IPaddress of you Domoticz HC in your home network
         apiPort: 8080,                               // just leave at 80
         moduleTitle: "My smart home by Domoticz",    //
-        temperatureTitle:"Current temperatures",  // You can adapt the following text to fit your language
+        temperatureTitle:"Current temperatures",     // You can adapt the following text to fit your language
         energyTitle: "Energy used by",               // The tile for the energy use part
         batteryTitle: "Battery level",
         blindsTitle:  "Blinds",
@@ -26,13 +26,13 @@
                     'blinds','humdity','baro','usage','voltage','alarm','sensor'],
         alarmOffLabel: "Security Disarmed",
         alarmOnLabel: "Security Armed",            
-        smartMeter: "false",
+        smartMeter: false,
         smartMeterOffset: 0,
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
         subMenus: false,                             // true or false
         excludeDevices: ['none'],                    // Devices you don`t want to see
-        onlyShowExcluded: false,
+        onlyShowExcluded: false,                     // Only show the excluded devices
         textWhite: false,
         groupSensors:false                           // group the data from a single Sensor
 	},
@@ -106,7 +106,7 @@
                    todayEnergy += parseFloat(wtt[0]);
                  }
               } else {
-                 if (dev.HardwareType == "P1 Smart Meter USB"){
+                 if (dev.HardwareType == 'P1 Smart Meter USB' || dev.Name == 'Power'){
                     usedEnergy=dev.Counter - this.config.smartMeterOffset;
                     todayEnergy=dev.CounterToday
                     powerUse=dev.Usage

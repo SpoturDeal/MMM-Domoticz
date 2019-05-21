@@ -34,7 +34,10 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
 |`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm` <br> **Default** <i>`temperature, energy`</i> |
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
+|`smartMeter`| Set to true if you use a P1 USB smart meter.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>false</i>|
+|`smartMeterOffset`| Set the beginning value of your smart meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
+|`onlyShowExcluded`| Only shows the devices that are in the excludedDevices array.<br>(For backward compatibility didn't change the name  excludedDevice setting)<br>**Type** `boolean`<br> **Default** <i>`false`</i> |
 |`textWhite`| Set the text colour to white instead of grey. <br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |
 |`alarmOffLabel`|Label if alarm is off. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Security Disarmed</i>|
 |`alarmOnLabel`|Label if alarm is armed. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Security Armed</i>|
@@ -50,7 +53,7 @@ Here is an example of an entry in `config.js`
 		apiBase: '192.168.xxx.xxx',
 		apiPort: 8080,
 		apiUser: "XXXX",
-    apiPw: "xxxx",
+    		apiPw: "xxxx",
 		moduleTitle: "My smart home by Domoticz",
 		energyTitle: "Energy used by",
 		batteryTitle: "Battery level",
@@ -60,10 +63,13 @@ Here is an example of an entry in `config.js`
 		energyTotal: "Energy used",
 		energyToday: "Energy used today",
 		batteryThreshold: 20,
-    coThreshold: 650,
+    		coThreshold: 650,
 		subMenus: true,
+		smartMeter: false,
+		smartMeterOffset: 0,
 		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor'],   
 		excludeDevices: ['none','add your own'],  // Device that will not be shown
+		onlyShowExcluded: false, // if true only exluded devices are shown
 		textWhite: false,
 		alarmOffLabel: "Disabled",
 		groupSensors: false
@@ -94,6 +100,12 @@ Changed error in example config.js (typo in excludedDevices is now excludeDevice
 Added Alarm system texts update the config if needed
 Re-Added Sensors made by BlackCatDeployment
 Restructured layout scripts. 
+
+## 21st May 2019
+Added support for SmartMeter p1 through USB
+Added SmartMeter offset requested by 1kOhm
+Changed excluded device to make it possible to only show selected Device requested by RienduPre
+Changed power usage metering if using a smartmeter requested by RienduPre
 
 The MIT License (MIT)
 =====================

@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.08 10th Januari 2019
+ * version 1.18 22th May 2019
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
@@ -26,10 +26,13 @@
                     'blinds','humdity','baro','usage','voltage','alarm','sensor'],
         alarmOffLabel: "Security Disarmed",
         alarmOnLabel: "Security Armed",            
+        smartMeter: "false",
+        smartMeterOffset: 0,
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
         subMenus: false,                             // true or false
         excludeDevices: ['none'],                    // Devices you don`t want to see
+        onlyShowExcluded: false,
         textWhite: false,
         groupSensors:false                           // group the data from a single Sensor
 	},
@@ -81,23 +84,33 @@
         // set for one device
         var dev=data.result[i];
         // Check if the device has been excluded. if not step through
-        if (this.config.excludeDevices.indexOf(dev.Name) == -1) {
+        if ((this.config.excludeDevices.indexOf(dev.Name) == -1  && this.config.onlyShowExcluded === false) ||
+             (this.config.excludeDevices.indexOf(dev.Name) >= -1  && this.config.onlyShowExcluded === true) ) {
            // Device is reconized by Usage and only active if in config.js
            if (dev.Usage && this.config.showItems.indexOf('usage')!== -1 ){
-              // add for current use
-              wtt=dev.Usage.split(' ');
-              if (wtt.length > 0){
-                 powerUse += parseFloat(wtt[0]);
-              }
-              // add for total use
-              wtt=dev.Data.split(' ');
-              if (wtt.length > 0){
-                 usedEnergy += parseFloat(wtt[0]);
-              }
-              // add for todays use
-              wtt=dev.CounterToday.split(' ');
-              if (wtt.length > 0){
-                 todayEnergy += parseFloat(wtt[0]);
+              if (this.config.smartMeter==false){
+              
+                 // add for current use
+                 wtt=dev.Usage.split(' ');
+                 if (wtt.length > 0){
+                   powerUse += parseFloat(wtt[0]);
+                 }
+                 // add for total use
+                 wtt=dev.Data.split(' ');
+                 if (wtt.length > 0){
+                   usedEnergy += parseFloat(wtt[0]);
+                 }
+                 // add for todays use
+                 wtt=dev.CounterToday.split(' ');
+                 if (wtt.length > 0){
+                   todayEnergy += parseFloat(wtt[0]);
+                 }
+              } else {
+                 if (dev.HardwareType == "P1 Smart Meter USB"){
+                    usedEnergy=dev.Counter - this.config.smartMeterOffset;
+                    todayEnergy=dev.CounterToday
+                    powerUse=dev.Usage
+                 }
               }
            }
            if (dev.Type.indexOf('Temp') >- 1){

@@ -22,12 +22,18 @@
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
         energyToday: "Today used",                   // Label for energy used today
+        gasTotal: "Total used gas",                   // Label for total registred gas used
+        gasToday: "Today used gas",                   // Label for gas used today
+        waterTotal: "Total used H2O",                   // Label for total registred water used
+        waterToday: "Today used H2O",                   // Label for water used today
         showItems: ['temperature','energy','battery','co',
                     'blinds','humdity','baro','usage','voltage','alarm','sensor'],
         alarmOffLabel: "Security Disarmed",
         alarmOnLabel: "Security Armed",            
         smartMeter: false,
         smartMeterOffset: 0,
+        smartMeterGasOffset: 0,
+        smartMeterWaterOffset: 0,
         batteryThreshold: 15,                        // if lower then threshold show
         coThreshold: 700,                            // if higher then threshold show
         subMenus: false,                             // true or false
@@ -77,7 +83,7 @@
        text += headClass + this.config.moduleTitle + headTab;
     }
     // Set the counters to zero important if using submodules.
-    var powerUse=0; usedEnergy=0; todayEnergy=0;
+    var powerUse=0; usedEnergy=0; todayEnergy=0; usedGas=0; todayGas=0;
     var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;
     // loop the length of the received json file
     for (i=0;i<data.result.length;i++){
@@ -106,11 +112,19 @@
                    todayEnergy += parseFloat(wtt[0]);
                  }
               } else {
-                 if (dev.HardwareType == 'P1 Smart Meter USB' || dev.Name == 'Power'){
+                 if (dev.HardwareType == 'P1 Smart Meter USB' && dev.SubType == 'Energy'){
                     usedEnergy=dev.Counter - this.config.smartMeterOffset;
                     todayEnergy=dev.CounterToday
                     powerUse=dev.Usage
                  }
+                 if (dev.HardwareType == 'P1 Smart Meter USB' && dev.SubType == 'Gas'){
+                    usedGas=dev.Counter - this.config.smartMeterGasOffset;
+                    todayGas=dev.CounterToday
+                 }
+                 if (dev.HardwareType == 'S0 Meter USB' && dev.SubType=='RFXMeter counter'){
+                    usedWater=dev.Counter - this.config.smartMeterWaterOffset;
+                    todayWater=dev.CounterToday
+                 }   
               }
            }
            if (dev.Type.indexOf('Temp') >- 1){
@@ -278,6 +292,15 @@
           text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
           text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
           text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
+          if (usedGas>5){
+             text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' m3' + endLine;
+             text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
+          }
+           if (usedWater>5){
+             text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' m3' + endLine;
+             text += trClassSmall + this.config.waterTotal + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
+          }
+          
           if (this.config.subMenus === true) { text += endTable; }
     }
     // if there were no subMenus then we must close the single table

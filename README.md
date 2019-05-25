@@ -113,7 +113,7 @@ Added SmartMeter offset requested by 1kOhm
 Changed excluded device to make it possible to only show selected Device requested by RienduPre
 Changed power usage metering if using a smartmeter requested by RienduPre
 
-## 25th May 2019 v1.23
+## 25th May 2019 v1.24
 Added smartMeter for Gas and Water
 Added support for SO pulse meters
 

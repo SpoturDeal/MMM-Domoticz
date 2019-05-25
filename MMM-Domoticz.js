@@ -181,7 +181,10 @@
           }
           if (dev.HardwareName == "SO Pulse counter"){
               pulseCount++;
-              pulse += trClassSmall + dev.Name  + tdEndClassSmall + dev.CounterToday + endLine; 
+              pulse += trClassSmall + dev.Name  + ' <i class="fa fa-clock-o"></i>' + tdEndClassSmall + dev.CounterToday + endLine; 
+              if (dev.Usage){
+                 pulse += trClassSmall + dev.Name + ' <i class="fa fa-calendar-o"></i>' + tdEndClassSmall + dev.Usage + endLine; 
+              }
           } 
 
           if (dev.BatteryLevel <= this.config.batteryThreshold) {

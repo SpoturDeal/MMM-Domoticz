@@ -28,6 +28,10 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>|
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
 |`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>|
+|`gasTotal`| The text of total gas used. <br>**Type:** `string`<br>**Default:** <i>Total gas used</i>|
+|`gasToday`| The text of total gas used today. <br>**Type:** `string`<br>**Default:** <i>Today used gas</i>|
+|`waterTotal`| The text of total water used. <br>**Type:** `string`<br>**Default:** <i>Total H2O used</i>|
+|`waterToday`| The text of total water used today. <br>**Type:** `string`<br>**Default:** <i>Today used H2O</i>|
 |`moduleTitle`| Defines the headline text.<br/>**Type:** `string`<br>**Default:** <i>My smart home by Domoticz</i>|
 |`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domoticz</i>|
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>||
@@ -36,6 +40,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
 |`smartMeter`| Set to true if you use a P1 USB smart meter.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>false</i>|
 |`smartMeterOffset`| Set the beginning value of your smart meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
+|`smartMeterGasOffset`| Set the beginning value of your smart gas meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
+|`smartMeterWaterOffset`| Set the beginning value of your smart water meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
 |`excludeDevices`| The device you like to show wich are ON. <br> **Type** `array`<br> One of the following: `Livingroom`, `Garden lights` <br> **Default** <i>`none`</i> |
 |`onlyShowExcluded`| Only shows the devices that are in the excludedDevices array.<br>(For backward compatibility didn't change the name  excludedDevice setting)<br>**Type** `boolean`<br> **Default** <i>`false`</i> |
 |`textWhite`| Set the text colour to white instead of grey. <br> **Type** `boolean`: true of false <br> **Default** <i>false</i> |

@@ -93,9 +93,8 @@
         if ((this.config.excludeDevices.indexOf(dev.Name) == -1  && this.config.onlyShowExcluded === false) ||
              (this.config.excludeDevices.indexOf(dev.Name) >= -1  && this.config.onlyShowExcluded === true) ) {
            // Device is reconized by Usage and only active if in config.js
-           if (dev.Usage && this.config.showItems.indexOf('usage')!== -1 ){
+           if ((dev.Usage || dev.Type == "RFXMeter") && this.config.showItems.indexOf('usage')!== -1 ){
               if (this.config.smartMeter==false){
-              
                  // add for current use
                  wtt=dev.Usage.split(' ');
                  if (wtt.length > 0){
@@ -119,7 +118,10 @@
                  }
                  if (dev.HardwareType == 'P1 Smart Meter USB' && dev.SubType == 'Gas'){
                     usedGas=dev.Counter - this.config.smartMeterGasOffset;
-                    todayGas=dev.CounterToday
+                    wtt=dev.CounterToday.split(' ');
+                    if (wtt.length > 0){
+                      todayGas=wtt[0]
+                    }
                  }
                  if (dev.HardwareType == 'S0 Meter USB' && dev.SubType == 'RFXMeter counter'){
                     wtt=dev.Counter.split(' ');
@@ -298,12 +300,12 @@
           text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
           text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
           text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
-          if (usedGas>5){
+          if (usedGas > 5){
              text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' m3' + endLine;
              text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
           }
-           if (usedWater>5){
-            text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
+           if (usedWater > 5){
+             text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
              text += trClassSmall + this.config.waterTotal + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
           }
           

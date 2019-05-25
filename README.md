@@ -36,7 +36,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domoticz</i>|
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>||
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
-|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm` <br> **Default** <i>`temperature, energy`</i> |
+|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm,sensor,pulse` <br> **Default** <i>`temperature, energy`</i> |
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
 |`smartMeter`| Set to true if you use a P1 USB smart meter.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>false</i>|
 |`smartMeterOffset`| Set the beginning value of your smart meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
@@ -73,7 +73,7 @@ Here is an example of an entry in `config.js`
 		subMenus: true,
 		smartMeter: false,
 		smartMeterOffset: 0,
-		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor'],   
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor','pulse'],   
 		excludeDevices: ['none','add your own'],  // Device that will not be shown
 		onlyShowExcluded: false, // if true only exluded devices are shown
 		textWhite: false,
@@ -107,11 +107,15 @@ Added Alarm system texts update the config if needed
 Re-Added Sensors made by BlackCatDeployment
 Restructured layout scripts. 
 
-## 21st May 2019
+## 21st May 2019 v1.18
 Added support for SmartMeter p1 through USB
 Added SmartMeter offset requested by 1kOhm
 Changed excluded device to make it possible to only show selected Device requested by RienduPre
 Changed power usage metering if using a smartmeter requested by RienduPre
+
+## 25th May 2019 v1.23
+Added smartMeter for Gas and Water
+Added support for SO pulse meters
 
 The MIT License (MIT)
 =====================

@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.23 25th May 2019
+ * version 1.24 25th May 2019
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
@@ -95,7 +95,7 @@
         if ((this.config.excludeDevices.indexOf(dev.Name) == -1  && this.config.onlyShowExcluded === false) ||
              (this.config.excludeDevices.indexOf(dev.Name) >= -1  && this.config.onlyShowExcluded === true) ) {
            // Device is reconized by Usage and only active if in config.js
-           if ((dev.Usage || dev.Type == "RFXMeter") && this.config.showItems.indexOf('usage')!== -1 ){
+           if ((dev.Usage || dev.Type == "RFXMeter" || dev.HardwareType == 'P1 Smart Meter USB') && this.config.showItems.indexOf('usage')!== -1 ){
               if (this.config.smartMeter==false){
                  // add for current use
                  wtt=dev.Usage.split(' ');
@@ -315,7 +315,7 @@
              text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
           }
            if (usedWater > 5){
-             text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
+             //text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
              text += trClassSmall + this.config.waterTotal + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
           }
           

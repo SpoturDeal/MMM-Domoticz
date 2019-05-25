@@ -122,8 +122,14 @@
                     todayGas=dev.CounterToday
                  }
                  if (dev.HardwareType == 'S0 Meter USB' && dev.SubType == 'RFXMeter counter'){
-                    usedWater=dev.Counter - this.config.smartMeterWaterOffset;
-                    todayWater=dev.CounterToday
+                    wtt=dev.Counter.split(' ');
+                    if (wtt.length > 0){
+                      usedWater=wtt[0] - this.config.smartMeterWaterOffset;
+                    }
+                    wtt=dev.CounterToday.split(' ');
+                    if (wtt.length > 0){
+                      todayWater=wtt[0]
+                    }
                  }   
               }
            }
@@ -297,7 +303,7 @@
              text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
           }
            if (usedWater>5){
-            text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' m3' + endLine;
+            text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
              text += trClassSmall + this.config.waterTotal + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
           }
           

@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.18 22th May 2019
+ * version 1.23 25th May 2019
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */

@@ -83,7 +83,7 @@
        text += headClass + this.config.moduleTitle + headTab;
     }
     // Set the counters to zero important if using submodules.
-    var powerUse=0; usedEnergy=0; todayEnergy=0; usedGas=0; todayGas=0;
+    var powerUse=0; usedEnergy=0; todayEnergy=0; usedGas=0; todayGas=0;usedWater=0;todayWater=0;
     var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;
     // loop the length of the received json file
     for (i=0;i<data.result.length;i++){
@@ -121,7 +121,7 @@
                     usedGas=dev.Counter - this.config.smartMeterGasOffset;
                     todayGas=dev.CounterToday
                  }
-                 if (dev.HardwareType == 'S0 Meter USB' && dev.SubType=='RFXMeter counter'){
+                 if (dev.HardwareType == 'S0 Meter USB' && dev.SubType == 'RFXMeter counter'){
                     usedWater=dev.Counter - this.config.smartMeterWaterOffset;
                     todayWater=dev.CounterToday
                  }   
@@ -297,7 +297,7 @@
              text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
           }
            if (usedWater>5){
-             text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' m3' + endLine;
+            text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' m3' + endLine;
              text += trClassSmall + this.config.waterTotal + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
           }
           

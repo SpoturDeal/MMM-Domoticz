@@ -321,7 +321,7 @@
           text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
           text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
           text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
-          if (this.config.showItems.indexOf('pulse') !== -1){
+          if (this.config.showItems.indexOf('meter') !== -1){
             if (kwh1 > 0){
               text += trClassSmall + this.config.energyMeter1 + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(3) + ' kWh' + endLine;
             }

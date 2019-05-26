@@ -24,7 +24,7 @@
         energyTotal: "Total used",                   // Label for total registred energy used
         energyToday: "Today used",                   // Label for energy used today
         energyMeter1: "kWh Meter I",
-        energyMeter2: "kWh Meter 2",
+        energyMeter2: "kWh Meter II",
         gasTotal: "Total used gas",                   // Label for total registred gas used
         gasToday: "Today used gas",                   // Label for gas used today
         waterTotal: "Total used H2O",                   // Label for total registred water used
@@ -328,8 +328,8 @@
              text += trClassSmall + this.config.energyMeter2 + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(3) + ' m3' + endLine;
           }
           if (usedGas > 5){
-             text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' m3' + endLine;
-             text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' kWh' + endLine;
+             text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' kWh' + endLine;
           }
            if (usedWater > 5){
              //text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;

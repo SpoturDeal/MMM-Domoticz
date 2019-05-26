@@ -27,7 +27,8 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`alarmLabel`| Alarm label. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Current alarm status:</i>|
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>|
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
-|`energyToday`| The text of total energy used today. <br>**Type:** `string`<br>**Default:** <i>Today used</i>|
+|`energyMeter1`| Label for energymeter 1. <br>**Type:** `string`<br>**Default:** <i>kWh meter I</i>|
+|`energyMeter2`| Label for energymeter 2. <br>**Type:** `string`<br>**Default:** <i>kWh meter II</i>|
 |`gasTotal`| The text of total gas used. <br>**Type:** `string`<br>**Default:** <i>Total gas used</i>|
 |`gasToday`| The text of total gas used today. <br>**Type:** `string`<br>**Default:** <i>Today used gas</i>|
 |`waterTotal`| The text of total water used. <br>**Type:** `string`<br>**Default:** <i>Total H2O used</i>|
@@ -36,7 +37,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`temperatureTitle`| Defines the temperature text.<br/>**Type:** `string`<br>**Default:** <i>Current temperatures Domoticz</i>|
 |`batteryThreshold`|Below this value it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>15</i>||
 |`coThreshold`|Above this level in ppm it will be shown.<br>**Type:** `Integer`<br>**Default:** <i>700</i>|
-|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm,sensor,pulse` <br> **Default** <i>`temperature, energy`</i> |
+|`showItems`| The items you like to show. <br> **Type** `array`<br> One of the following: `temperature, energy,battery,co,blinds,humidity,baro,usage,voltage,alarm,sensor,pulse,meter` <br> **Default** <i>`['temperature','energy','usage','meter']`</i> |
 |`subMenus`| Set if you want separate menus.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>true</i>|
 |`smartMeter`| Set to true if you use a P1 USB smart meter.<br/>**Type:** `boolean`<br>**Options:** true, false<br>**Default:** <i>false</i>|
 |`smartMeterOffset`| Set the beginning value of your smart meter.<br/>**Type:** `integer`<br>**Default:** <i>0</i>|
@@ -117,10 +118,13 @@ Changed power usage metering if using a smartmeter requested by RienduPre
 Added smartMeter for Gas and Water
 Added support for SO pulse meters
 
+## 26th May 2019 v1.26
+Added meter values
+
 The MIT License (MIT)
 =====================
 
-Copyright © 2018 SpoturDeal - Carl
+Copyright © 2019 SpoturDeal - Carl
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

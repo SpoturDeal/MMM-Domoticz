@@ -23,14 +23,14 @@
         energyNow: "Currently",                      // Label to show current use
         energyTotal: "Total used",                   // Label for total registred energy used
         energyToday: "Today used",                   // Label for energy used today
-        energyMeter1: "kWh Meter I",
-        energyMeter2: "kWh Meter II",
+        energyMeter1: "kWh meter I",
+        energyMeter2: "kWh meter II",
         gasTotal: "Total used gas",                   // Label for total registred gas used
         gasToday: "Today used gas",                   // Label for gas used today
         waterTotal: "Total used H2O",                   // Label for total registred water used
         waterToday: "Today used H2O",                   // Label for water used today
         showItems: ['temperature','energy','battery','co',
-                    'blinds','humdity','baro','usage','voltage','alarm','sensor','pulse'],
+                    'blinds','humdity','baro','usage','voltage','alarm','sensor','pulse','meter'],
         alarmOffLabel: "Security Disarmed",
         alarmOnLabel: "Security Armed",            
         smartMeter: false,
@@ -321,11 +321,13 @@
           text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
           text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
           text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
-          if (kwh1 > 0){
-             text += trClassSmall + this.config.energyMeter1 + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(3) + ' kWh' + endLine;
-          }
-          if (kwh2 > 0){
-             text += trClassSmall + this.config.energyMeter2 + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(3) + ' kWh' + endLine;
+          if (this.config.showItems.indexOf('pulse') !== -1){
+            if (kwh1 > 0){
+              text += trClassSmall + this.config.energyMeter1 + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(3) + ' kWh' + endLine;
+            }
+            if (kwh2 > 0){
+              text += trClassSmall + this.config.energyMeter2 + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(3) + ' kWh' + endLine;
+            }
           }
           if (usedGas > 5){
              text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' m3' + endLine;

@@ -322,14 +322,14 @@
           text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
           text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
           // If meter is in showitems only within usage and smartmeter
-          if (this.config.showItems.indexOf('meter') !== -1){
+          //if (this.config.showItems.indexOf('meter') !== -1){
             if (kwh1 > 0){
               text += trClassSmall + this.config.energyMeter1 + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(3) + ' kWh' + endLine;
             }
             if (kwh2 > 0){
               text += trClassSmall + this.config.energyMeter2 + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(3) + ' kWh' + endLine;
             }
-          }
+          //}
           if (usedGas > 5){
              text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' m3' + endLine;
              text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;

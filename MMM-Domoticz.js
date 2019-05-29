@@ -148,7 +148,7 @@
            if (dev.Type.indexOf('Temp') >- 1){
               // add to make sure temperature is added for display
               tempCount++;
-              therm += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Temp< 0.6?'red':'')+ tdEndOpenSmall + parseFloat(dev.Temp).toFixed(1);
+              therm += trClassSmall + dev.Name +'&nbsp;' + tdClassOpenSmall + (dev.Temp< 0.6?'red':'')+ tdEndOpenSmall + parseFloat(dev.Temp).toFixed(1);
               therm += '&deg; <i class="fa fa-thermometer-half"></i>' + endLine;
               // set a temporary name to prevent device names end double in groups
               tempName = dev.Name;
@@ -173,25 +173,25 @@
                 default:
                     icon="fa-lightbulb-o"
               }
-              power += trClassSmall + dev.Name + tdEndClassSmall+'<i class="fa ' + icon + '"></i>' + endLine;
+              power += trClassSmall + dev.Name + '&nbsp;' + tdEndClassSmall+'<i class="fa ' + icon + '"></i>' + endLine;
           }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               // add to make sure blinds are added for display
               blindsCount++;
               // use icons arrow up for open arrow down for close (no need for translation)
-              blinds += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i>' + endLine;
+              blinds += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Closed"?'yellow':'')+'"><i class="fa fa-arrow-' + (dev.Status=="Closed"?'down':'up') + '"></i>' + endLine;
           }
           if (dev.Type == "Light/Switch" && (dev.SwitchType == "Door Contact" || dev.SwitchType == "Contact")){
               // add to make sure sensors are added for display
               sensorCount++;
               // use icons toggle on for open toggle off for close (no need for translation)
-              sensor += trClassSmall + dev.Name  + tdClassOpenSmall + (dev.Status=="Closed"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Closed"?'off':'on') + tdEndOpenSmall + endLine;
+              sensor += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + (dev.Status=="Closed"?'green':'red')+'"><i class="fa fa-toggle-' + (dev.Status=="Closed"?'off':'on') + tdEndOpenSmall + endLine;
           }
           if (dev.HardwareName == "SO Pulse counter"){
               pulseCount++;
-              pulse += trClassSmall + dev.Name  + ' <i class="fa fa-clock-o"></i>' + tdEndClassSmall + dev.CounterToday + endLine; 
+              pulse += trClassSmall + dev.Name + '&nbsp;' + ' <i class="fa fa-clock-o"></i>' + tdEndClassSmall + dev.CounterToday + endLine; 
               if (dev.Usage){
-                 pulse += trClassSmall + dev.Name + ' <i class="fa fa-calendar-o"></i>' + tdEndClassSmall + dev.Usage + endLine; 
+                 pulse += trClassSmall + dev.Name + '&nbsp;' + ' <i class="fa fa-calendar-o"></i>' + tdEndClassSmall + dev.Usage + endLine; 
               }
           } 
 
@@ -208,14 +208,14 @@
                   batteryIcon = "empty"
               }
               // if level is 8% lower then threshold the color the device Name red
-              batt += trClassOpenSmall +(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name + tdClassOpenSmall +(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%'  + endLine;
+              batt += trClassOpenSmall +(dev.BatteryLevel < this.config.batteryThreshold - 8?'red':'')+'">' + dev.Name +'&nbsp;' + tdClassOpenSmall +(dev.BatteryLevel< 15?'red':'') + '"><i class="fa fa-battery-' + batteryIcon + '"></i> ' + dev.BatteryLevel + '%'  + endLine;
           }
           if (dev.Type=="General"){
             if (dev.subType){
               if (dev.subType == "Voltage" || dev.subType == "Current"){
                  // For both current and voltage */
                  voltageCount++;
-                 voltage += trClassSmall + dev.Name  + tdClassOpenSmall + dev.Data+'">' + endLine;
+                 voltage += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall + dev.Data+'">' + endLine;
               }
             }
           }
@@ -250,7 +250,7 @@
                  coCount++;
                  // if level is 300 above thresholt then color ppm in red
                  alarmLvl=this.config.coThreshold + 300;
-                 co += trClassSmall + dev.Name  + tdClassOpenSmall +(pts[0] > alarmLvl?'red':'')+ tdEndOpenSmall + dev.Data  + endLine;
+                 co += trClassSmall + dev.Name + '&nbsp;' + tdClassOpenSmall +(pts[0] > alarmLvl?'red':'')+ tdEndOpenSmall + dev.Data  + endLine;
               }
           }
           if (dev.Type.indexOf('Humidity') >- 1 && this.config.showItems.indexOf('humidity') !== -1){
@@ -267,7 +267,7 @@
                  tempName = dev.Name;
               } else {
                  if (this.config.showItems.indexOf('humidity')){
-                    humi += trClassSmall + dev.Name  + tdEndClassSmall;
+                    humi += trClassSmall + dev.Name + '&nbsp;' + tdEndClassSmall;
                     humi += parseInt(dev.Humidity) + '% <i class="fa fa-tint"></i>' + endLine;
                  }
               }
@@ -284,7 +284,7 @@
                  therm += parseInt(dev.Barometer) + ' hPa' + endLine;
               } else {
                  if (this.config.showItems.indexOf('baro')){
-                    baro += trClassSmall + dev.Name + tdEndClassSmall;
+                    baro += trClassSmall + dev.Name + '&nbsp;'  + tdEndClassSmall;
                     baro += parseInt(dev.Barometer) + ' hPa' + endLine;
                  }
               }
@@ -318,25 +318,25 @@
 
     if (this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text +=  endTable; }
-          text += trClassSmall + this.config.energyNow + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
-          text += trClassSmall + this.config.energyToday + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
-          text += trClassSmall + this.config.energyTotal + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
+          text += trClassSmall + this.config.energyNow + '&nbsp;' + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
+          text += trClassSmall + this.config.energyToday + '&nbsp;' + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
+          text += trClassSmall + this.config.energyTotal + '&nbsp;' + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
           // If meter is in showitems only within usage and smartmeter
-          //if (this.config.showItems.indexOf('meter') !== -1){
+          if (this.config.showItems.indexOf('meter') !== -1){
             if (kwh1 > 0){
-              text += trClassSmall + this.config.energyMeter1 + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(3) + ' kWh' + endLine;
+              text += trClassSmall + this.config.energyMeter1 + '&nbsp;' + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(0) + ' kWh' + endLine;
             }
             if (kwh2 > 0){
-              text += trClassSmall + this.config.energyMeter2 + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(3) + ' kWh' + endLine;
+              text += trClassSmall + this.config.energyMeter2 + '&nbsp;' + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(0) + ' kWh' + endLine;
             }
-          //}
+          }
           if (usedGas > 5){
-             text += trClassSmall + this.config.gasToday + tdEndClassSmall + parseFloat(todayGas).toFixed(3) + ' m3' + endLine;
-             text += trClassSmall + this.config.gasTotal + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.gasToday + '&nbsp;' + tdEndClassSmall + parseFloat(todayGas).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.gasTotal + '&nbsp;' + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
           }
            if (usedWater > 5){
              //text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
-             text += trClassSmall + this.config.waterTotal + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.waterTotal + '&nbsp;' + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
           }
           
           if (this.config.subMenus === true) { text += endTable; }

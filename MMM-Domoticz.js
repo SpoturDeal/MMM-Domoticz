@@ -1,11 +1,19 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.26 26th May 2019
+ * version 1.33 04th June 2019
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
  Module.register('MMM-Domoticz', {
-	defaults: {
+	/**********************************************
+     *    DO NOT CHANGE THESE DEFAULT VALUES      *
+     *  THE WILL BE OVERWRITTEN BY A NEW UPDATE   *
+     * ALL SETTINGS MUST BE DONE IN THE config.js *
+     *   FILE IN DIRECTORY ~/MagicMirror/config   *
+     * -- READ INSTRUCTIONS IN README.md FILE --  *
+     **********************************************
+     */
+    defaults: {
         updateInterval: 45,                          // every 45 seconds
         apiBase: '192.168.xx.xxx',                   // the IPaddress of you Domoticz HC in your home network
         apiPort: 8080,                               // just leave at 80
@@ -318,25 +326,25 @@
 
     if (this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text +=  endTable; }
-          text += trClassSmall + this.config.energyNow + '&nbsp;' + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
-          text += trClassSmall + this.config.energyToday + '&nbsp;' + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
-          text += trClassSmall + this.config.energyTotal + '&nbsp;' + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
+          text += trClassSmall + this.config.energyNow + '&nbsp;<i class="fa fa-bolt" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(powerUse).toFixed(1) + ' Watt' + endLine;
+          text += trClassSmall + this.config.energyToday + '&nbsp;<i class="fa fa-bolt" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(todayEnergy).toFixed(3) + ' kWh' + endLine;
+          text += trClassSmall + this.config.energyTotal + '&nbsp;<i class="fa fa-bolt" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(usedEnergy).toFixed(1) + ' kWh' + endLine;
           // If meter is in showitems only within usage and smartmeter
           if (this.config.showItems.indexOf('meter') !== -1){
             if (kwh1 > 0){
-              text += trClassSmall + this.config.energyMeter1 + '&nbsp;' + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(0) + ' kWh' + endLine;
+              text += trClassSmall + this.config.energyMeter1 + '&nbsp;<i class="fa fa-area-chart" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(kwh1/1000).toFixed(0) + ' kWh' + endLine;
             }
             if (kwh2 > 0){
-              text += trClassSmall + this.config.energyMeter2 + '&nbsp;' + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(0) + ' kWh' + endLine;
+              text += trClassSmall + this.config.energyMeter2 + '&nbsp;<i class="fa fa-area-chart" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(kwh2/1000).toFixed(0) + ' kWh' + endLine;
             }
           }
           if (usedGas > 5){
-             text += trClassSmall + this.config.gasToday + '&nbsp;' + tdEndClassSmall + parseFloat(todayGas).toFixed(1) + ' m3' + endLine;
-             text += trClassSmall + this.config.gasTotal + '&nbsp;' + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.gasToday + '&nbsp;<i class="fa fa-fire" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(todayGas).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.gasTotal + '&nbsp;<i class="fa fa-fire" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(usedGas).toFixed(1) + ' m3' + endLine;
           }
            if (usedWater > 5){
              //text += trClassSmall + this.config.waterToday + tdEndClassSmall + parseFloat(todayWater).toFixed(3) + ' ltr' + endLine;
-             text += trClassSmall + this.config.waterTotal + '&nbsp;' + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
+             text += trClassSmall + this.config.waterTotal + '&nbsp;<i class="fa fa-tint" aria-hidden="true"></i>&nbsp;' + tdEndClassSmall + parseFloat(usedWater).toFixed(1) + ' m3' + endLine;
           }
           
           if (this.config.subMenus === true) { text += endTable; }

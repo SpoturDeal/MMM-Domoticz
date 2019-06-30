@@ -25,6 +25,7 @@ This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module al
 |`voltageTitle`| Voltage title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Voltage/Current</i>|
 |`alarmTitle`| Alarm title. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Alarm system</i>|
 |`alarmLabel`| Alarm label. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Current alarm status:</i>|
+|`rainLabel`| Rain label. <br>**Type:** `string`<br>**Options:** Anything<br/>**Default:** <i>Rain meter:</i>|
 |`energyNow`| The text for the energy you currently use. <br>**Type:** `string`<br>**Default:** <i>Currently</i>|
 |`energyTotal`| The text of total energy used. <br>**Type:** `string`<br>**Default:** <i>Total used</i>|
 |`energyMeter1`| Label for energymeter 1. <br>**Type:** `string`<br>**Default:** <i>kWh meter I</i>|
@@ -74,7 +75,7 @@ Here is an example of an entry in `config.js`
 		subMenus: true,
 		smartMeter: false,
 		smartMeterOffset: 0,
-		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor','pulse'],   
+		showItems: ['temperature','energy','battery','co','blinds','humidity','baro','usage','voltage','alarm','sensor','pulse','meter','rain'],   
 		excludeDevices: ['none','add your own'],  // Device that will not be shown
 		onlyShowExcluded: false, // if true only exluded devices are shown
 		textWhite: false,
@@ -120,6 +121,9 @@ Added support for SO pulse meters
 
 ## 26th May 2019 v1.26
 Added meter values
+
+## 30th June 2019 v1.35
+Added rain meter
 
 The MIT License (MIT)
 =====================

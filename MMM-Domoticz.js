@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.33 04th June 2019
+ * version 1.35 30th June 2019
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
@@ -26,6 +26,7 @@
         alarmTitle: "Alarm system",
         alarmLabel: "Current alarm status",
         pulseLabel: "Pulse meters",
+        rainLabel: "Rain",
         coTitle: "CO2 level",
         sensorTitle: "Window/Door sensors",
         energyNow: "Currently",                      // Label to show current use
@@ -38,7 +39,7 @@
         waterTotal: "Total used H2O",                   // Label for total registred water used
         waterToday: "Today used H2O",                   // Label for water used today
         showItems: ['temperature','energy','battery','co',
-                    'blinds','humdity','baro','usage','voltage','alarm','sensor','pulse','meter'],
+                    'blinds','humdity','baro','usage','voltage','alarm','sensor','pulse','meter','rain'],
         alarmOffLabel: "Security Disarmed",
         alarmOnLabel: "Security Armed",            
         smartMeter: false,
@@ -69,7 +70,7 @@
 	render: function(data){
     // recieved data
     var text = '<div>';
-    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";pulse="";
+    var therm = ""; power = ""; batt = ""; co = ""; blinds = ""; humi=""; baro=""; tempName=""; volt=""; alarm=""; sensor="";pulse=""; rain="";
     // set the most used html parts as variables
     var headClass='<header class="module-header sub-header">';
     var headTab='</header><table'+this.setTextColour()+' class="sub-header">';
@@ -90,13 +91,14 @@
        alarm = headClass + this.config.alarmTitle + headTab;
        sensor = headClass + this.config.sensorTitle + headTab;
        pulse = headClass + this.config.pulseLabel + headTab;
+       rain = headClass + this.config.rainLabel + headTab;
     } else {
        // make a single table without suBMenus
        text += headClass + this.config.moduleTitle + headTab;
     }
     // Set the counters to zero important if using submodules.
     var powerUse=0; usedEnergy=0; todayEnergy=0; usedGas=0; todayGas=0;usedWater=0;todayWater=0;kwh1=0;kwh2=0;
-    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;pulseCount=0;
+    var powerCount=0; tempCount=0; coCount=0; batteryCount=0;blindsCount=0;voltageCount=0;alarmCount=0;sensorCount=0;pulseCount=0;rainCount=0;
     // loop the length of the received json file
     for (i=0;i<data.result.length;i++){
         // set for one device
@@ -182,6 +184,11 @@
                     icon="fa-lightbulb-o"
               }
               power += trClassSmall + dev.Name + '&nbsp;' + tdEndClassSmall+'<i class="fa ' + icon + '"></i>' + endLine;
+          } else if (dev.Type =="Rain"){
+              wtt=dev.Data.split(';');
+              rain += trClassSmall + dev.Name + '&nbsp;<i class="fa fa-clock-o"></i>' + tdEndClassSmall + wtt[0] + endLine;
+              rain += trClassSmall + dev.Name + '&nbsp;<i class="fa fa-calendar-o"></i>' + tdEndClassSmall + wtt[1] + endLine;
+              
           }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               // add to make sure blinds are added for display
@@ -312,6 +319,7 @@
        alarm += endTable;
        sensor += endTable;
        pulse += endTable;
+       rain += endTable;
     }
     // Check which items are chose in config.js then add for Mirror
     if (tempCount >0 ){    text += (this.config.showItems.indexOf('temperature') !== -1?therm:''); }
@@ -323,6 +331,7 @@
     if (coCount > 0){      text += (this.config.showItems.indexOf('co') !== -1?co:'');  }
     if (sensorCount > 0){  text += (this.config.showItems.indexOf('sensor') !== -1?sensor:'');  }
     if (pulseCount > 0){  text += (this.config.showItems.indexOf('pulse') !== -1?pulse:'');  }
+    if (rainCount > 0){  text += (this.config.showItems.indexOf('rain') !== -1?rain:'');  }
 
     if (this.config.showItems.indexOf('usage')!== -1 ){
           if (this.config.subMenus === true) { text +=  endTable; }

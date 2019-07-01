@@ -1,6 +1,6 @@
 /* Magic Mirror
  * Module: MagicMirror-Domoticz-Module
- * version 1.35 30th June 2019
+ * version 1.36 01st July 2019
  * By SpoturDeal https://github.com/SpoturDeal
  * MIT Licensed.
  */
@@ -186,6 +186,7 @@
               power += trClassSmall + dev.Name + '&nbsp;' + tdEndClassSmall+'<i class="fa ' + icon + '"></i>' + endLine;
           } else if (dev.Type =="Rain"){
               wtt=dev.Data.split(';');
+              rainCount++;
               rain += trClassSmall + dev.Name + '&nbsp;<i class="fa fa-clock-o"></i>' + tdEndClassSmall + wtt[0] + endLine;
               rain += trClassSmall + dev.Name + '&nbsp;<i class="fa fa-calendar-o"></i>' + tdEndClassSmall + wtt[1] + endLine;
               

@@ -186,10 +186,13 @@
               power += trClassSmall + dev.Name + '&nbsp;' + tdEndClassSmall+'<i class="fa ' + icon + '"></i>' + endLine;
           } else if (dev.Type =="Rain"){
               wtt=dev.Data.split(';');
-              rainCount++;
-              rain += trClassSmall + dev.Name + '&nbsp;<i class="fa fa-clock-o"></i>' + tdEndClassSmall + wtt[0] + endLine;
-              rain += trClassSmall + dev.Name + '&nbsp;<i class="fa fa-calendar-o"></i>' + tdEndClassSmall + wtt[1] + endLine;
-              
+              if (wtt.length==2){
+                rainCount++;
+                rain += '<tr><td class="small">' + dev.Name + ' <i class="fa fa-clock-o"></i></td><td class="small">' + wtt[0] + '</td></tr>';
+                rain += '<tr><td class="small">' + dev.Name + ' <i class="fa fa-calendar-o"></i></td><td class="small">' + wtt[1] + '</td></tr>';
+              } else {
+                rain += '<tr><td class="small">' + dev.Name + ' <i class="fa fa-clock-o"></i></td><td class="small">' + dev.Rain + 'mm</td></tr>';
+              }
           }
           if (dev.SwitchType == "Blinds" || dev.SwitchType == "Blinds Inverted"){
               // add to make sure blinds are added for display

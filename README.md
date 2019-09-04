@@ -2,6 +2,10 @@
 
 This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module allows you read data from your Domiticz Home Center
 
+## Important message
+
+Due to a great number of requests that I am not able to implement, mostly simply because I don't have the same devices connected to my Domoticz system there will be no more new features added to this module.
+In the past some addiditions have been made that probably is only used by the user that requested it. It is not possible to award every request. 
 
 ## Installation
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/spoturdeal/MMM-Domoticz.git`.

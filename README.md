@@ -1,4 +1,4 @@
-# MMM-Domiticz
+# MMM-Domoticz
 
 This <a href="https://github.com/MichMich/MagicMirror">MagicMirror</a> module allows you read data from your Domiticz Home Center
 
